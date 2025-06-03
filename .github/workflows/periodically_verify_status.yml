@@ -68,6 +68,7 @@ jobs:
           echo "DEST_S3_PATH=s3://$BUCKET/$PREFIX" >> $GITHUB_ENV
           echo "DEST_S3_EVIDENCE_PATH=s3://$BUCKET/$PREFIX/$EVIDENCE_PREFIX" >> $GITHUB_ENV
           echo "DEST_S3_ATTESTATION_PATH=s3://$BUCKET/$PREFIX/$ATTESTATION_PREFIX" >> $GITHUB_ENV
+          echo "BASE_HOST=$BASE_HOST" >> $GITHUB_ENV
 
           if [[ "$BUCKET" == *production* ]]; then
             echo "S3_KMS_ID=${{ vars.PRODUCTION_S3_KMS }}" >> $GITHUB_ENV
