@@ -1,0 +1,127 @@
+name: periodically-verify-status
+
+# required for configure-aws-credentials action
+permissions:
+  id-token: write
+  contents: read
+
+on:
+  schedule:
+    # runs at 00:00 every day
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+    inputs:
+      fedramp20x-host:
+        description: 'fedramp20x FQDN'
+        required: false
+        type: choice
+        options:
+          - https://status.staging.vyond-fedramp.org
+          - https://status.vyond-fedramp.com
+      fedramp20x-s3-bucket:
+        description: 'fedramp20x S3 bucket'
+        required: false
+        type: choice
+        options:
+          - vf-staging-fedramp20x-us-east-1
+          - vf-production-fedramp20x-us-east-1
+      fedramp20x-s3-prefix:
+        description: 'fedramp20x S3 phaseone prefix'
+        required: false
+        type: choice
+        options:
+          - "phase-one"
+      fedramp20x-evidence-s3-prefix:
+        description: 'fedramp20x S3 evidence prefix'
+        required: false
+        type: choice
+        options:
+          - "evidence"
+      fedramp20x-attestation-s3-prefix:
+        description: 'fedramp20x S3 attestation prefix'
+        required: false
+        type: choice
+        options:
+          - "attestation"
+jobs:
+  periodically-verify-status:
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    env:
+      AWS_USE_FIPS_ENDPOINT: true
+      AWS_REGION: "us-east-1"
+    steps:
+      - name: Determine S3 and Role env
+        run: |
+          BUCKET="${{ github.event.inputs.fedramp20x-s3-bucket }}"
+          PREFIX="${{ github.event.inputs.fedramp20x-s3-prefix }}"
+          EVIDENCE_PREFIX="${{ github.event.inputs.fedramp20x-evidence-s3-prefix }}"
+          ATTESTATION_PREFIX="${{ github.event.inputs.fedramp20x-attestation-s3-prefix }}"
+          BASE_HOST="${{ github.event.inputs.fedramp20x-host }}"
+
+          BUCKET=${BUCKET:-${{ vars.DEFAULT_FEDRAMP20X_S3_BUCKET }}}
+          PREFIX=${PREFIX:-${{ vars.DEFAULT_FEDRAMP20X_S3_PREFIX }}}
+          EVIDENCE_PREFIX=${EVIDENCE_PREFIX:-${{ vars.DEFAULT_FEDRAMP20X_EVIDENCE_S3_PREFIX }}}
+          ATTESTATION_PREFIX=${ATTESTATION_PREFIX:-${{ vars.DEFAULT_FEDRAMP20X_ATTESTATION_S3_PREFIX }}}
+          BASE_HOST=${BASE_HOST::-${{ vars.DEFAULT_FEDRAMP20X_HOST }}}
+
+          echo "DEST_S3_PATH=s3://$BUCKET/$PREFIX" >> $GITHUB_ENV
+          echo "DEST_S3_EVIDENCE_PATH=s3://$BUCKET/$PREFIX/$EVIDENCE_PREFIX" >> $GITHUB_ENV
+          echo "DEST_S3_ATTESTATION_PATH=s3://$BUCKET/$PREFIX/$ATTESTATION_PREFIX" >> $GITHUB_ENV
+
+          if [[ "$BUCKET" == *production* ]]; then
+            echo "S3_KMS_ID=${{ vars.PRODUCTION_S3_KMS }}" >> $GITHUB_ENV
+            echo "ROLE_TO_ASSUME=${{ vars.PRODUCTION_FEDRAMP20X_ROLE_ARN }}" >> $GITHUB_ENV
+          else
+            echo "S3_KMS_ID=${{ vars.NON_PRODUCTION_S3_KMS }}" >> $GITHUB_ENV
+            echo "ROLE_TO_ASSUME=${{ vars.NON_PRODUCTION_FEDRAMP20X_ROLE_ARN }}" >> $GITHUB_ENV
+          fi
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Assume GitHub OIDC AWS role
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: ${{ env.ROLE_TO_ASSUME }}
+
+      - name: Show current AWS session
+        run: aws sts get-caller-identity
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+
+      - name: Give execute permissions to scripts
+        run: |
+          chmod +x scripts/*.sh || true
+
+      - name: Check for required input file
+        run: |
+          test -f data.json || (echo "Missing data.json" && exit 1)
+
+      - name: Run validation script
+        run: |
+          mkdir -p evidence
+          python3 auto_validation.py
+
+      - name: Upload HTML report to S3
+        run: |
+          aws s3 cp ksi_validation_report.html ${DEST_S3_PATH}/ --content-type text/html --sse aws:kms --sse-kms-key-id ${S3_KMS_ID}
+
+      - name: Upload evidence files to S3
+        run: |
+          if compgen -G "evidence/*" > /dev/null; then
+            for file in evidence/*; do
+              echo "Uploading $file..."
+              aws s3 cp "$file" "${DEST_S3_EVIDENCE_PATH}/$(basename "$file")" --sse aws:kms --sse-kms-key-id ${S3_KMS_ID}
+            done
+          else
+            echo "No evidence files found in evidence/"
+          fi
