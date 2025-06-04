@@ -344,7 +344,7 @@
             "04": {
                "desc": "Regularly test the capability to recover from incidents and contingencies",
                "type": "attestation",
-               "ref": "./attestation/KSI-RPL-3.pdf",
+               "ref": "./attestation/KSI-RPL-4.pdf",
                "note": "V4G tests the contingency plan annually"
             }
          }
