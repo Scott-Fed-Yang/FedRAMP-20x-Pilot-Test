@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OUTPUT_FILE="./evidence/KSI-SC-2.txt"
+OUTPUT_FILE="./evidence/KSI-SVC-2.txt"
 
 # Initialize JSON output
 echo '{"EncryptionStatus": {' > "$OUTPUT_FILE"

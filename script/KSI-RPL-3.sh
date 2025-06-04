@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Configuration
-OUTPUT_FILE="./evidence/KSI-IR-2.txt"
-TEMP_FILE="./evidence/KSI-IR-2-tmp-$$.txt"
+OUTPUT_FILE="./evidence/KSI-RPL-3.txt"
+TEMP_FILE="./evidence/KSI-RPL-3-tmp-$$.txt"
 
 # Ensure output directory exists
 mkdir -p "$(dirname "$OUTPUT_FILE")"

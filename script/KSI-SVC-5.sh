@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Configuration
-OUTPUT_FILE="./evidence/KSI-SC-5.txt"
-TEMP_FILE="./evidence/KSI-SC-5-temp-$$.txt"
+OUTPUT_FILE="./evidence/KSI-SVC-5.txt"
+TEMP_FILE="./evidence/KSI-SVC-5-temp-$$.txt"
 
 # Ensure output directory exists
 mkdir -p "$(dirname "$OUTPUT_FILE")"

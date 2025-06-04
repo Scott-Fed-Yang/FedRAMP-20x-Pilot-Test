@@ -1,19 +1,24 @@
 #!/bin/bash
 
-# Configuration
-URL="https://app.vyond-fedramp.com"
-OUTPUT_FILE="./evidence/KSI-CNA-1.txt"
+# Define output file for evidence
+EVIDENCE_FILE="./evidence/KSI-CNA-1.txt"
 
-# Ensure output directory exists
-mkdir -p "$(dirname "$OUTPUT_FILE")"
+# Ensure evidence directory exists
+mkdir -p ./evidence
 
-# Execute curl command and save output
-curl -I "$URL" > "$OUTPUT_FILE" 2>&1
+# Run AWS CLI command and capture output
+RESULT=$(aws ec2 describe-security-groups --filters Name=group-name,Values=default --query 'SecurityGroups[*].{GroupId:GroupId,GroupName:GroupName,InboundRules:IpPermissions[*],OutboundRules:IpPermissionsEgress[*]}' --output json)
 
-# Check for CloudFront headers (case-insensitive)
-if grep -i -E 'X-Cache:.*cloudfront|Via:.*cloudfront|X-Amz-Cf-Id:' "$OUTPUT_FILE" >/dev/null; then
-  echo "True"
+# Save result to evidence file
+echo "$RESULT" > "$EVIDENCE_FILE"
+
+# Parse result to check if InboundRules and OutboundRules are empty
+INBOUND_EMPTY=$(echo "$RESULT" | jq '.[] | .InboundRules | length == 0')
+OUTBOUND_EMPTY=$(echo "$RESULT" | jq '.[] | .OutboundRules | length == 0')
+
+# Check if both are empty
+if [ "$INBOUND_EMPTY" = "true" ] && [ "$OUTBOUND_EMPTY" = "true" ]; then
+    echo "True"
 else
-  echo "False"
+    echo "False"
 fi
-exit 0

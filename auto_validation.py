@@ -3,6 +3,7 @@ import os
 import subprocess
 from datetime import datetime
 from zoneinfo import ZoneInfo
+from collections import Counter
 
 # Capture execution time
 execution_time = datetime.now(ZoneInfo("America/New_York")).strftime("%H:%M %Z %B/%d/%Y")
@@ -15,8 +16,10 @@ FULL_PATH = f"{BASE_HOST}/phase-one/"
 with open("data.json", "r") as f:
     data = json.load(f)
 
-# Initialize results storage
+# Initialize results storage and counters
 ksi_results = []
+result_counter = Counter()
+method_counter = Counter()
 
 # Process KSI Validation
 for ksi in data["KSI Validation"]:
@@ -36,7 +39,6 @@ for ksi in data["KSI Validation"]:
 
             # Execute script and capture output
             try:
-                # Assume script echoes "True" or "False"
                 process = subprocess.run(
                     ["bash", script_path],
                     capture_output=True,
@@ -46,7 +48,7 @@ for ksi in data["KSI Validation"]:
                 script_output = process.stdout.strip().splitlines()[-1]
                 result = script_output == "True"
 
-                # Check if evidence file was created by the script
+                # Check if evidence file was created
                 if os.path.exists(evidence_file):
                     evidence = evidence_file
                 else:
@@ -57,11 +59,15 @@ for ksi in data["KSI Validation"]:
                 result = False
                 evidence = "Script execution failed"
 
+            method_counter["Auto Validation"] += 1
         elif cap["type"] == "attestation":
             result = cap["ref"] != "False"
             if cap["ref"] in ["NA", "False"]:
                 evidence = cap["ref"]
 
+            method_counter["Attestation"] += 1
+
+        result_counter["True" if result else "False"] += 1
         ksi_entry["Capabilities"].append({
             "Number": cap_key,
             "Desc": cap["desc"],
@@ -72,6 +78,16 @@ for ksi in data["KSI Validation"]:
         })
 
     ksi_results.append(ksi_entry)
+
+# Calculate ratios for executive summary
+total_items = sum(result_counter.values())
+true_ratio = result_counter["True"] / total_items * 100 if total_items else 0
+false_ratio = result_counter["False"] / total_items * 100 if total_items else 0
+auto_ratio = method_counter["Auto Validation"] / total_items * 100 if total_items else 0
+attestation_ratio = method_counter["Attestation"] / total_items * 100 if total_items else 0
+
+# Determine background color for True/False ratio value cell
+result_bg_class = "true-bg_class" if result_counter["False"] == 0 and total_items > 0 else "false-bg_class"
 
 # Generate HTML
 html_content = f"""
@@ -101,14 +117,20 @@ html_content = f"""
         th {{
             background-color: #f2f2f2;
         }}
-        .true-bg {{
+        .true-bg_class {{
             background-color: #d4edda;
         }}
-        .false-bg {{
+        .false-bg_class {{
             background-color: #f8d7da;
         }}
         .summary-table td:nth-child(1) {{
             width: 20%;
+        }}
+        .executive-table td:nth-child(1) {{
+            width: 50%;
+        }}
+        .executive-table td:nth-child(2) {{
+            width: 50%;
         }}
         .ksi-table th:nth-child(1), .ksi-table td:nth-child(1) {{
             width: 5%;
@@ -156,6 +178,26 @@ html_content = f"""
         </tr>
     </table>
 
+    <h2>Executive Summary</h2>
+    <table class="executive-table">
+        <tr>
+            <th>Metric</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>Total Items</td>
+            <td>{total_items}</td>
+        </tr>
+        <tr>
+            <td>True/False Ratio</td>
+            <td class="{result_bg_class}">True: {result_counter["True"]} ({true_ratio:.2f}%)<br>False: {result_counter["False"]} ({false_ratio:.2f}%)</td>
+        </tr>
+        <tr>
+            <td>Auto Validation/Attestation Ratio</td>
+            <td>Auto Validation: {method_counter["Auto Validation"]} ({auto_ratio:.2f}%)<br>Attestation: {method_counter["Attestation"]} ({attestation_ratio:.2f}%)</td>
+        </tr>
+    </table>
+
     <h2>Key Security Indicators and Validations</h2>
 """
 
@@ -178,23 +220,22 @@ for ksi in ksi_results:
     for cap in ksi["Capabilities"]:
         validation_method = "Auto Validation" if cap["Type"] == "script" else "Attestation"
         result_text = "True" if cap["Result"] else "False"
-        result_class = "true-bg" if cap["Result"] else "false-bg"
+        result_class = "true-bg_class" if cap["Result"] else "false-bg_class"
 
         # Handle evidence hyperlink
         evidence_text = cap["Evidence"]
         if cap["Type"] == "script" and os.path.exists(cap["Evidence"]):
             evidence_file = os.path.basename(cap["Evidence"])
-            evidence_text = f'<a href="{FULL_PATH}{cap["Evidence"]}" target="_blank">{evidence_file}</a>'
+            evidence_text = f'<a href="{cap["Evidence"]}" target="_blank">{evidence_file}</a>'
         elif cap["Type"] == "attestation" and cap["Evidence"] not in ["NA", "False"]:
-            # Handle multiple files in ref (e.g., comma-separated)
             if ", " in cap["Evidence"]:
                 files = cap["Evidence"].split(", ")
                 evidence_text = ", ".join(
-                    f'<a href="{FULL_PATH}{f}" target="_blank">{os.path.basename(f)}</a>' for f in files
+                    f'<a href="{f}" target="_blank">{os.path.basename(f)}</a>' for f in files
                 )
             else:
                 evidence_file = os.path.basename(cap["Evidence"])
-                evidence_text = f'<a href="{FULL_PATH}{cap["Evidence"]}" target="_blank">{evidence_file}</a>'
+                evidence_text = f'<a href="{cap["Evidence"]}" target="_blank">{evidence_file}</a>'
 
         html_content += f"""
         <tr>
