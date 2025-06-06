@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # Configuration
-OUTPUT_FILE="./evidence/KSI-SVC-5.txt"
-TEMP_FILE="./evidence/KSI-SVC-5-temp-$$.txt"
+OUTPUT_FILE="./evidence/$(basename "$0" .sh).txt"
+SCRIPT_BASENAME=$(basename "$0" .sh)
+TEMP_FILE="./evidence/${SCRIPT_BASENAME}-tmp-$$.txt"
 
 # Ensure output directory exists
 mkdir -p "$(dirname "$OUTPUT_FILE")"

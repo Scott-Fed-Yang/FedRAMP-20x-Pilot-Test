@@ -14,44 +14,72 @@
             "01": {
                "desc": "Configure ALL information resources to limit inbound and outbound traffic",
                "type": "script",
-               "ref": "./script/KSI-CNA-1.sh",
+               "ref": [
+                  {
+                     "script": "./script/KSI-CNA-1.sh"
+                  }
+               ],
                "note": "V4G uses AWS Security Group to limit the traffic and the default Security Group denies all traffics"
             },
             "02": {
                "desc": "Design systems to minimize the attack surface and minimize lateral movement if compromised",
                "type": "script",
-               "ref": "./script/KSI-CNA-2.sh",
+               "ref": [
+                  {
+                     "script": "./script/KSI-CNA-2.sh"
+                  }
+               ],
                "note": "Inventory all EC2 hosts to guarantee all hosts are segmented by VPC to minimize lateral movement if compromised"
             },
             "03": {
                "desc": "Use logical networking and related capabilities to enforce traffic flow controls",
                "type": "script",
-               "ref": "./script/KSI-CNA-3.sh",
+               "ref": [
+                  {
+                     "script": "./script/KSI-CNA-3.sh"
+                  }
+               ],
                "note": "Confrim all hosts are attahced at least 1 security group to guarantee the traffic flow is enforced by the cloud native network"
             },
             "04": {
                "desc": "Use immutable infrastructure with strictly defined functionality and privileges by default",
                "type": "script",
-               "ref": "./script/KSI-CNA-4.sh",
+               "ref": [
+                  {
+                     "script": "./script/KSI-CNA-4.sh"
+                  }
+               ],
                "note": "Check the AWS IAM policy to guarantee each policy has been defined functionality and privileges."
             },
             "05": {
                "desc": "Have denial of service protection",
                "type": "script",
-               "ref": "./script/KSI-CNA-5.sh",
+               "ref": [
+                  {
+                     "script": "./script/KSI-CNA-5.sh"
+                  }
+               ],
                "note": "AWS CloudFront is enabled to prevent from DoS attack"
             },
             "06": {
                "desc": "Design systems for high availability and rapid recovery",
-               "type": "attestation",
-               "ref": "./attestation/KSI-CNA-6.pdf",
-               "note": "V4G hosts on AWS and inherits the high availability from AWS"
+               "type": "script",
+               "ref": [
+                  {
+                     "script": "./script/KSI-CNA-6.sh"
+                  }
+               ],
+               "note": "Check the AWS Trusted Advisor fault-tolerance-checks (https://docs.aws.amazon.com/awssupport/latest/user/fault-tolerance-checks.html), V4G commit most qualifications"
             },
             "07": {
-               "desc": "Ensure cloud-native information resources are implemented based on host provider’s best practices and documented guidance",
-               "type": "attestation",
-               "ref": "NA",
-               "note": "V4G hosts on AWS and follows AWS documentation (https://docs.aws.amazon.com/) to do the implementation"
+               "desc": "Ensure cloud-native information resources are implemented based on host provider\u2019s best practices and documented guidance",
+               "type": "script",
+               "ref": [
+                  {
+                     "script": "./script/KSI-CNA-7.sh"
+                  }
+               ],
+               "note": "V4G hosts on AWS and follows AWS Well-Architected Framework (https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html) to do the implementation"
             }
          }
       },
@@ -62,44 +90,73 @@
             "01": {
                "desc": "Harden and review network and system configurations",
                "type": "attestation",
-               "ref": "./attestation/KSI-SVC-1.pdf",
+               "ref": [
+                  {
+                     "text": "KSI-SVC-1.pdf",
+                     "link": "https://drive.google.com/file/d/1r6g37KjLcRy3CzDAFzB-0o2tEM23YBlY/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G hardens the configuration based on CIS benchmark and montly reviews the configuration with Tanable"
             },
             "02": {
                "desc": "Encrypt or otherwise secure network traffic",
                "type": "script",
-               "ref": "./script/KSI-SVC-2.sh",
+               "ref": [
+                  {
+                     "script": "./script/KSI-SVC-2.sh"
+                  }
+               ],
                "note": "V4G has encrypted the network traffics of all Load balancers and S3 buckets"
             },
             "03": {
                "desc": "Encrypt all federal and sensitive information at rest",
                "type": "script",
-               "ref": "./script/KSI-SVC-3.sh",
+               "ref": [
+                  {
+                     "script": "./script/KSI-SVC-3.sh"
+                  }
+               ],
                "note": "All S3 buckets and RDS instances are encrypted"
             },
             "04": {
                "desc": "Manage configuration centrally",
-               "type": "attestation",
-               "ref": "./attestation/KSI-SVC-4.png",
-               "note": "V4G uses AWS Amazon Machine Images (AMIs) to manage the configured images"
+               "type": "script",
+               "ref": [
+                  {
+                     "script": "./script/KSI-SVC-4.sh"
+                  }
+               ],
+               "note": "V4G uses Packer build AWS Amazon Machine Images (AMIs) to manage the configured images"
             },
             "05": {
                "desc": "Enforce system and information resource integrity through cryptographic means",
                "type": "script",
-               "ref": "./script/KSI-SVC-5.sh",
+               "ref": [
+                  {
+                     "script": "./script/KSI-SVC-5.sh"
+                  }
+               ],
                "note": "V4G has encrypted all AWS EBS to store the image"
             },
             "06": {
                "desc": "Use automated key management systems to manage, protect, and regularly rotate digital keys and certificates",
                "type": "script",
-               "ref": "./script/KSI-SVC-6.sh",
+               "ref": [
+                  {
+                     "script": "./script/KSI-SVC-6.sh"
+                  }
+               ],
                "note": "V4G uses AWS Key Management Service to manage and automatically rotate the key"
             },
             "07": {
                "desc": "Use a consistent, risk-informed approach for applying security patches",
-               "type": "attestation",
-               "ref": "./attestation/KSI-SVC-7.png",
-               "note": "V4G has subscripted AWS Linux Security Center to inform for applying security patches"
+               "type": "script",
+               "ref": [
+                  {
+                     "script": "./script/KSI-SVC-7.sh"
+                  }
+               ],
+               "note": "V4G has subscripted AWS 2023 update (https://docs.aws.amazon.com/linux/al2023/ug/receive-update-notification.html) to inform for applying security patches"
             }
          }
       },
@@ -110,37 +167,75 @@
             "01": {
                "desc": "Enforce multi-factor authentication (MFA) using methods that are difficult to intercept or impersonate (phishing-resistant MFA) for all user authentication",
                "type": "attestation",
-               "ref": "./attestation/KSI-IAM-1-AWS.png, ./attestation/KSI-IAM-1-Google.png",
+               "ref": [
+                  {
+                     "text": "KSI-IAM-1-AWS.png",
+                     "link": "https://drive.google.com/file/d/1xcaC4F86_Y4_kzNzykHSpWHvgjXnNjLR/view?usp=drive_link"
+                  },
+                  {
+                     "text": "KSI-IAM-1-Google.png",
+                     "link": "https://drive.google.com/file/d/1jYGXEgz8t3aKS1RngajTHgfKTgu5jQRp/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G has enforced YubiKey 5 FIPS Series (CMVP #3914) to be the MFA device of AWS and Google Identity (the other external service must SSO with Google Identity) to guarantee phishing-resistent"
             },
             "02": {
                "desc": "Use secure passwordless methods for user authentication and authorization when feasible, otherwise enforce strong passwords with MFA",
                "type": "attestation",
-               "ref": "./attestation/KSI-IAM-2-AWS.png, ./attestation/KSI-IAM-2-Google.png",
+               "ref": [
+                  {
+                     "text": "KSI-IAM-2-AWS.png",
+                     "link": "https://drive.google.com/file/d/1-4iGflSB73yERxhKasXTrQafm11UOoLZ/view?usp=drive_link"
+                  },
+                  {
+                     "text": "KSI-IAM-2-Google.png",
+                     "link": "https://drive.google.com/file/d/1xbdN2-UeuAy3zYUKOAALPQR3vK6LeS_V/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G has enforced strong passwords for users, and the other external service must SSO with Google Identity"
             },
             "03": {
                "desc": "Enforce appropriately secure authentication methods for non-user accounts and services",
                "type": "attestation",
-               "ref": "./attestation/KSI-IAM-3.png",
+               "ref": [
+                  {
+                     "text": "KSI-IAM-3.png",
+                     "link": "https://drive.google.com/file/d/1e2AsdsJdEkQ6nnnvDbCyljfZzaR-nL-v/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G does not allows the non-user accounts/services to do the console login"
             },
             "04": {
                "desc": "Use a least-privileged, role and attribute-based, and just-in-time security authorization model for all user and non-user accounts and services",
                "type": "attestation",
-               "ref": "./attestation/KSI-IAM-4.xlsx",
+               "ref": [
+                  {
+                     "text": "KSI-IAM-4.xlsx",
+                     "link": "https://docs.google.com/spreadsheets/d/10-e7t5OTuczInesQ-y4PSMy_AMVW2vVi/edit?usp=drive_link&ouid=107592241952893885147&rtpof=true&sd=true"
+                  }
+               ],
                "note": "V4G follows the Separation of Duties Matrix to fulfill the requirement"
             },
             "05": {
                "desc": "Apply zero trust design principles",
                "type": "attestation",
-               "ref": "./attestation/KSI-IAM-5.pdf",
+               "ref": [
+                  {
+                     "text": "KSI-IAM-5.pdf",
+                     "link": "https://drive.google.com/file/d/1KdXmj3W-xJZi0ciaM_klTlgQadwb1_6R/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G follows AWS document to implement the Zero Trust Design principle"
             },
             "06": {
                "desc": "Automatically disable or otherwise secure accounts with privileged access in response to suspicious activity",
                "type": "attestation",
-               "ref": "NA",
+               "ref": [
+                  {
+                     "text": "NA",
+                     "link": null
+                  }
+               ],
                "note": "V4G hosts on AWS and adopts Google Workspace to be the document repository, the account management is inherited from the security control of each side"
             }
          }
@@ -152,37 +247,71 @@
             "01": {
                "desc": "Operate a Security Information and Event Management (SIEM) or similar system(s) for centralized, tamper-resistent logging of events, activities, and changes",
                "type": "attestation",
-               "ref": "./attestation/KSI-MLA-1.png",
+               "ref": [
+                  {
+                     "text": "KSI-MLA-1.png",
+                     "link": "https://drive.google.com/file/d/1CTcmyYtie7JTbj1R7IuUJyfkdxE7vZ5H/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G adopts Sumo Logic (FR#:FR1918740338) to be the SIEM"
             },
             "02": {
                "desc": "Regularly review and audit logs",
                "type": "attestation",
-               "ref": "./attestation/KSI-MLA-2.png",
+               "ref": [
+                  {
+                     "text": "KSI-MLA-2.png",
+                     "link": "https://drive.google.com/file/d/12Emr2nJotl2d-pwoLChfVz8v-xtJMNoL/view?usp=drive_link"
+                  }
+               ],
                "note": "Sumo Logic helps to review and analyze the log immediately and V4G runs the investigation for the suspicious behaviors when occurred"
             },
             "03": {
                "desc": "Rapidly detect and remediate or mitigate vulnerabilities",
                "type": "attestation",
-               "ref": "./attestation/KSI-MLA-3.pdf",
+               "ref": [
+                  {
+                     "text": "KSI-MLA-3.pdf",
+                     "link": "https://drive.google.com/file/d/1I2maz1Z7eP7EHq5W0lCophWupLXI9W84/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G follows the procedure (the section 'Flaw Remediation') to remediate the vulnerability based on 30 (High) - 90 (Moderate) - 180 (Low) days principle"
             },
             "04": {
                "desc": "Perform authenticated vulnerability scanning on information resources",
                "type": "attestation",
-               "ref": "./attestation/KSI-MLA-4.png",
+               "ref": [
+                  {
+                     "text": "KSI-MLA-4.png",
+                     "link": "https://drive.google.com/file/d/1FGJSnHPIwE5CO1AH9z5cZFklXdiNh934/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G runs the installed agent to run the authenticated vulnerability scanning with Tenable (FR#:FR1814276801)"
             },
             "05": {
                "desc": "Perform Infrastructure as Code and configuration evaluation and testing",
                "type": "attestation",
-               "ref": "./attestation/KSI-MLA-5-TerraForm.png, ./attestation/KSI-MLA-5-ConfigScan.png",
+               "ref": [
+                  {
+                     "text": "KSI-MLA-5-TerraForm.png",
+                     "link": "https://drive.google.com/file/d/1eGrR2vseikVDkBAYPTQcA0qP8Jr6PpY9/view?usp=drive_link"
+                  },
+                  {
+                     "text": "KSI-MLA-5-ConfigScan.png",
+                     "link": "https://drive.google.com/file/d/1bNpZd-zIWmTO6cuCNEyel3Emp169aRbB/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G adopts TerraForm to be the IaC and monthly runs the Configuration scanning with Tenable (FR#:FR1814276801)"
             },
             "06": {
                "desc": "Centrally track and prioritize the mitigation and/or remediation of identified vulnerabilities",
                "type": "attestation",
-               "ref": "./attestation/KSI-MLA-6.png",
+               "ref": [
+                  {
+                     "text": "KSI-MLA-6.png",
+                     "link": "https://drive.google.com/file/d/1dFIsRYkG3nWqYP3pW16y_pSU6By7orjk/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G follows FedRAMP requirements and adopts the POA&M sheet to centrally track and prioritize the remediation of identified vulnerabilities"
             }
          }
@@ -194,31 +323,60 @@
             "01": {
                "desc": "Log and monitor system modifications",
                "type": "attestation",
-               "ref": "./attestation/KSI-CMT-1.png",
+               "ref": [
+                  {
+                     "text": "KSI-CMT-1.png",
+                     "link": "https://drive.google.com/file/d/1daRPOlvFu7aof69Bb-NyIwKKS8HTE3qS/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G adopts on-premise Trend Micro Deep Security to monitor system modifications"
             },
             "02": {
                "desc": "Execute changes though redeployment of version controlled immutable resources rather than direct modification wherever possible",
                "type": "attestation",
-               "ref": "./attestation/KSI-CMT-2.png",
+               "ref": [
+                  {
+                     "text": "KSI-CMT-2.png",
+                     "link": "https://drive.google.com/file/d/1fY4Ph7oYw8V-rVatd_Fh1GB8Vjcntd1L/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G adopts Blue-Green Deployment strategy and all hosts are immutable and relaunched with the new version of the image per monthly deployment"
             },
             "03": {
                "desc": "Implement automated testing and validation of changes prior to deployment",
                "type": "attestation",
-               "ref": "./attestation/KSI-CMT-3.png",
+               "ref": [
+                  {
+                     "text": "KSI-CMT-3.png",
+                     "link": "https://drive.google.com/file/d/1RnZGb8IQM06eTUxXscomguKjZMs8qvHk/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G has executed the automation process to test and verify the change per deployment"
             },
             "04": {
                "desc": "Have a documented change management procedure",
                "type": "attestation",
-               "ref": "./attestation/KSI-CMT-4.pdf",
+               "ref": [
+                  {
+                     "text": "KSI-CMT-4.pdf",
+                     "link": "https://drive.google.com/file/d/1mLWZQkd1jWpJvDn8g0lhjYP988aozt0Q/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G has followed FedRAMP requirements to document the change management procedure, all chenage requirements must follow the procedure"
             },
             "05": {
                "desc": "Evaluate the risk and potential impact of any change",
                "type": "attestation",
-               "ref": "./attestation/KSI-CMT-5-CR.pdf, ./attestation/KSI-CMT-5-SIA.pdf",
+               "ref": [
+                  {
+                     "text": "KSI-CMT-5-CR.pdf",
+                     "link": "https://drive.google.com/file/d/1ze4r_ktpkYZd5YPRUcBCHrcubLy6F103/view?usp=drive_link"
+                  },
+                  {
+                     "text": "KSI-CMT-5-SIA.pdf",
+                     "link": "https://drive.google.com/file/d/1YatAtshxwajTlDAY6GxC3cZKRwO7EJeP/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G has evaluated the risk and potential impact of each change"
             }
          }
@@ -230,43 +388,78 @@
             "01": {
                "desc": "Have an up-to-date information resource inventory or code defining all deployed assets, software, and services",
                "type": "attestation",
-               "ref": "./attestation/KSI-PIY-1.pdf",
+               "ref": [
+                  {
+                     "text": "KSI-PIY-1.pdf",
+                     "link": "https://drive.google.com/file/d/1ESIs3PM8NGM_xXKV6VgcrFZFYtnQy7iF/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G runs the asset inventory for each deployment and modification"
             },
             "02": {
                "desc": "Have policies outlining the security objectives of all information resources",
                "type": "attestation",
-               "ref": "./attestation/KSI-PIY-2.pdf",
+               "ref": [
+                  {
+                     "text": "KSI-PIY-2.pdf",
+                     "link": "https://drive.google.com/file/d/1Sx4TkOvnoo9eGUPfyrhHHiqCglqmVPbL/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G has outlined the security objective as the commitment in the policy"
             },
             "03": {
                "desc": "Maintain a vulnerability disclosure program",
                "type": "attestation",
-               "ref": "./attestation/KSI-PIY-3.pdf",
+               "ref": [
+                  {
+                     "text": "KSI-PIY-3.pdf",
+                     "link": "https://drive.google.com/file/d/1dMzKlBiK_8zC1gAHrwh4j0flhM4vKJSb/view?usp=drive_link"
+                  }
+               ],
                "note": "The vulnerability disclosure program is maintained and published in the help center"
             },
             "04": {
                "desc": "Build security considerations into the Software Development Lifecycle and align with CISA Secure By Design principles",
                "type": "attestation",
-               "ref": "./attestation/KSI-PIY-4.pdf",
+               "ref": [
+                  {
+                     "text": "KSI-PIY-4.pdf",
+                     "link": "https://drive.google.com/file/d/1jNiPPQ-NWNX0wa2HmKNCC2vTaiSd-Un0/view?usp=drive_link"
+                  }
+               ],
                "note": "The SDLC is documented and the security function is covered in the Technical Specification phase to guarantee Secure by Design"
             },
             "05": {
                "desc": "Document methods used to evaluate information resource implementations",
                "type": "attestation",
-               "ref": "./attestation/KSI-PIY-5.pdf",
+               "ref": [
+                  {
+                     "text": "KSI-PIY-5.pdf",
+                     "link": "https://drive.google.com/file/d/1Ken5pwQVDqte98l30ChALNQGFGov8b3H/view?usp=drive_link"
+                  }
+               ],
                "note": "The method to run the automation testing plan for the implementation is documented"
             },
             "06": {
                "desc": "Have a dedicated staff and budget for security with executive support, commensurate with the size, complexity, scope, and risk of the service offering",
                "type": "attestation",
-               "ref": "NA",
+               "ref": [
+                  {
+                     "text": "NA",
+                     "link": null
+                  }
+               ],
                "note": "The dedicated staff and budget for security is arranged. However, for the confidential purpose there is no evidence can be published"
             },
             "07": {
                "desc": "Document risk management decisions for software supply chain security",
                "type": "attestation",
-               "ref": "./attestation/KSI-PIY-7.pdf",
+               "ref": [
+                  {
+                     "text": "KSI-PIY-7.pdf",
+                     "link": "https://drive.google.com/file/d/1bSmXk9bSooObK3RPUuR6GdV-NKQnTCyq/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G has documented the Supply Chain Risk Management Plan and follows the plan to perform the decision"
             }
          }
@@ -278,25 +471,49 @@
             "01": {
                "desc": "Identify all third-party information resources",
                "type": "attestation",
-               "ref": "./attestation/KSI-TPR-1.pdf",
+               "ref": [
+                  {
+                     "text": "KSI-TPR-1.pdf",
+                     "link": "https://drive.google.com/file/d/16gKdMNKGwIq98Cyrd-xx6WCoVO3occAZ/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G has identified all third-party vendors and place the inventory information in the SSP, see the section 6 and 7 of the evidence file"
             },
             "02": {
                "desc": "Regularly confirm that services handling federal information or are likely to impact the confidentiality, integrity, or availability of federal information are FedRAMP authorized and securely configured",
                "type": "attestation",
-               "ref": "./attestation/KSI-TPR-2.pdf",
+               "ref": [
+                  {
+                     "text": "KSI-TPR-2.pdf",
+                     "link": "https://drive.google.com/file/d/17LyFgTWUZdqJ5RvHInQ5JmXgtAFMQQNS/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G annually reviews all external services are FedRAMP authorized and securely configured"
             },
             "03": {
                "desc": "Identify and prioritize mitigation of potential supply chain risks",
                "type": "attestation",
-               "ref": "./attestation/KSI-TPR-3.pdf",
+               "ref": [
+                  {
+                     "text": "KSI-TPR-3.pdf",
+                     "link": "https://drive.google.com/file/d/1cpeEe5Hv1Y7q4ulZ-UlhVLzSSURq-OUQ/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G has identified the potential supply chain risks and reviewed it annually"
             },
             "04": {
                "desc": "Monitor third party software information resources for upstream vulnerabilities, with contractual notification requirements or active monitoring services",
                "type": "attestation",
-               "ref": "./attestation/KSI-TPR-4-SumoLogic.pdf, ./attestation/KSI-TPR-4-Tenable.pdf",
+               "ref": [
+                  {
+                     "text": "KSI-TPR-4-SumoLogic.pdf",
+                     "link": "https://drive.google.com/file/d/13YtOhJzUque5ipdBkpMqt-L66_1CjzBD/view?usp=drive_link"
+                  },
+                  {
+                     "text": "KSI-TPR-4-Tenable.pdf",
+                     "link": "https://drive.google.com/file/d/15IVa0L-KN0F73KuBHofsGjU80VgQmboB/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G has subscribed the third party vendor's subscription for the status notification"
             }
          }
@@ -308,13 +525,23 @@
             "01": {
                "desc": "Ensure all employees receive security awareness training",
                "type": "attestation",
-               "ref": "./attestation/KSI-CED-1.png",
+               "ref": [
+                  {
+                     "text": "KSI-CED-1.png",
+                     "link": "https://drive.google.com/file/d/1twIJ_ChdMK47GyLcq-5ly9D1W6KLUCHw/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G has performed and ensured all participants receive and complete the security awareness training with KnowBe4 (FR#:FR2201340492)"
             },
             "02": {
                "desc": "Require role-specific training for high risk roles, including at least roles with privileged access",
                "type": "attestation",
-               "ref": "./attestation/KSI-CED-2.png",
+               "ref": [
+                  {
+                     "text": "KSI-CED-2.png",
+                     "link": "https://drive.google.com/file/d/10g3d1P-WiTAPZVgP34WXZ9pUM9zp416-/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G has requested the participants to complete the security awareness training based on the role"
             }
          }
@@ -326,25 +553,44 @@
             "01": {
                "desc": "Define Recovery Time Objectives (RTO) and Recovery Point Objectives (RPO)",
                "type": "attestation",
-               "ref": "./attestation/KSI-RPL-1.pdf",
+               "ref": [
+                  {
+                     "text": "KSI-RPL-1.pdf",
+                     "link": "https://drive.google.com/file/d/1to_ev5Lm9Cqr-p_-l8XbM8-0V8ypMfbb/view?usp=drive_link"
+                  }
+               ],
                "note": "The RTO is 8 hours and RPO is 24 hours based on the frequency of data backup strategy"
             },
             "02": {
                "desc": "Develop and maintain a recovery plan that aligns with the defined recovery objectives",
                "type": "attestation",
-               "ref": "./attestation/KSI-RPL-2.pdf",
+               "ref": [
+                  {
+                     "text": "KSI-RPL-2.pdf",
+                     "link": "https://drive.google.com/file/d/1uiQAh15Fp8ZxEk5GxEh1ZnYtMdz-z-wf/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G has developed a recovery plan that aligns with the defined recovery objectives, and reivewed the plan annually"
             },
             "03": {
                "desc": "Perform system backups aligned with recovery objectives",
                "type": "script",
-               "ref": "./script/KSI-RPL-3.sh",
+               "ref": [
+                  {
+                     "script": "./script/KSI-RPL-3.sh"
+                  }
+               ],
                "note": "V4G has backup the required images and data to align with the RTO and RPO"
             },
             "04": {
                "desc": "Regularly test the capability to recover from incidents and contingencies",
                "type": "attestation",
-               "ref": "./attestation/KSI-RPL-4.pdf",
+               "ref": [
+                  {
+                     "text": "KSI-RPL-4.pdf",
+                     "link": "https://drive.google.com/file/d/1dezi7GxRnznCu503YZg42CsPnfkmtAun/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G tests the contingency plan annually"
             }
          }
@@ -356,19 +602,34 @@
             "01": {
                "desc": "Report incidents according to FedRAMP requirements and cloud service provider policies",
                "type": "attestation",
-               "ref": "./attestation/KSI-INR-1.pdf",
+               "ref": [
+                  {
+                     "text": "KSI-INR-1.pdf",
+                     "link": "https://drive.google.com/file/d/1IAunxR0sIhkQWphn-fToGMTvsPt9gdKt/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G has followed federal requirements and documented the Incident Response Plan"
             },
             "02": {
                "desc": "Maintain a log of incidents and periodically review past incidents for patterns or vulnerabilities",
                "type": "attestation",
-               "ref": "./attestation/KSI-INR-2.pdf",
+               "ref": [
+                  {
+                     "text": "KSI-INR-2.pdf",
+                     "link": "https://drive.google.com/file/d/1HR8TJWbBPrReKvN46Grx83LqCPAOR_xW/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G has documented the Incident Response Form and asked to maintrain the log of incidents"
             },
             "03": {
                "desc": "Generate after action reports and regularly incorporate lessons learned into operations",
                "type": "attestation",
-               "ref": "./attestation/KSI-INR-3.pdf",
+               "ref": [
+                  {
+                     "text": "KSI-INR-3.pdf",
+                     "link": "https://drive.google.com/file/d/1612ehPb0JhAMKJ-CIaAbQ6dIV3DTgQa_/view?usp=drive_link"
+                  }
+               ],
                "note": "V4G has documented the lesson learned session in the Incident Response Plan"
             }
          }

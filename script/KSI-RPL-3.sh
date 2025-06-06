@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration
-OUTPUT_FILE="./evidence/KSI-RPL-3.txt"
+OUTPUT_FILE="./evidence/$(basename "$0" .sh).txt"
 TEMP_FILE="./evidence/KSI-RPL-3-tmp-$$.txt"
 
 # Ensure output directory exists

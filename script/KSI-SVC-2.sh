@@ -1,6 +1,10 @@
 #!/bin/bash
 
-OUTPUT_FILE="./evidence/KSI-SVC-2.txt"
+# Configuration
+OUTPUT_FILE="./evidence/$(basename "$0" .sh).txt"
+
+# Ensure output directory exists
+mkdir -p "$(dirname "$OUTPUT_FILE")"
 
 # Initialize JSON output
 echo '{"EncryptionStatus": {' > "$OUTPUT_FILE"

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration
-OUTPUT_FILE="./evidence/KSI-CNA-3.txt"
+OUTPUT_FILE="./evidence/$(basename "$0" .sh).txt"
 
 # Ensure output directory exists
 mkdir -p "$(dirname "$OUTPUT_FILE")"

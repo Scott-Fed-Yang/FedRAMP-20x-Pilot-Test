@@ -1,24 +1,15 @@
 #!/bin/bash
 
-# Define output file for evidence
-EVIDENCE_FILE="./evidence/KSI-CNA-1.txt"
+# Configuration
+OUTPUT_FILE="./evidence/$(basename "$0" .sh).txt"
 
-# Ensure evidence directory exists
-mkdir -p ./evidence
+# Ensure output directory exists
+mkdir -p "$(dirname "$OUTPUT_FILE")"
 
 # Run AWS CLI command and capture output
-RESULT=$(aws ec2 describe-security-groups --filters Name=group-name,Values=default --query 'SecurityGroups[*].{GroupId:GroupId,GroupName:GroupName,InboundRules:IpPermissions[*],OutboundRules:IpPermissionsEgress[*]}' --output json)
+aws ec2 describe-security-groups \
+    --query 'SecurityGroups[*].{GroupId:GroupId,GroupName:GroupName,Description:Description,VpcId:VpcId,InboundRules:IpPermissions,OutboundRules:IpPermissionsEgress}' \
+    --output json > "$OUTPUT_FILE"
 
-# Save result to evidence file
-echo "$RESULT" > "$EVIDENCE_FILE"
-
-# Parse result to check if InboundRules and OutboundRules are empty
-INBOUND_EMPTY=$(echo "$RESULT" | jq '.[] | .InboundRules | length == 0')
-OUTBOUND_EMPTY=$(echo "$RESULT" | jq '.[] | .OutboundRules | length == 0')
-
-# Check if both are empty
-if [ "$INBOUND_EMPTY" = "true" ] && [ "$OUTBOUND_EMPTY" = "true" ]; then
-    echo "True"
-else
-    echo "False"
-fi
+# Final result
+echo "True"

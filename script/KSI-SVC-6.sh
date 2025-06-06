@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Define output file for evidence
-EVIDENCE_FILE="./evidence/KSI-SVC-6.txt"
+# Configuration
+OUTPUT_FILE="./evidence/$(basename "$0" .sh).txt"
+
+# Ensure output directory exists
+mkdir -p "$(dirname "$OUTPUT_FILE")"
 
 # Skipped key ID
 SKIPPED_KEY="ac5934d9-6d65-405d-9826-e185079d1ceb"
-
-# Ensure evidence directory exists
-mkdir -p ./evidence
 
 # Initialize evidence file
 echo "KMS Key Rotation Status Check" > "$EVIDENCE_FILE"
@@ -49,7 +49,7 @@ for KEY_ID in $KEY_IDS; do
 
     # Get key metadata
     KEY_METADATA=$(aws kms describe-key --key-id "$KEY_ID" --query 'KeyMetadata.{KeyManager:KeyManager,KeySpec:KeySpec}' --output json)
-    
+
     if [ $? -ne 0 ]; then
         echo "KeyId: $KEY_ID - Error: Failed to describe key" >> "$EVIDENCE_FILE"
         ALL_ROTATION_ENABLED=false
@@ -63,7 +63,7 @@ for KEY_ID in $KEY_IDS; do
     if [ "$KEY_SPEC" = "SYMMETRIC_DEFAULT" ]; then
         # Get key rotation status
         ROTATION_STATUS=$(aws kms get-key-rotation-status --key-id "$KEY_ID" --output json)
-        
+
         if [ $? -ne 0 ]; then
             echo "KeyId: $KEY_ID - Error: Failed to get rotation status" >> "$EVIDENCE_FILE"
             ALL_ROTATION_ENABLED=false

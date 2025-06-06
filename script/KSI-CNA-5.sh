@@ -2,7 +2,7 @@
 
 # Configuration
 URL="https://app.vyond-fedramp.com"
-OUTPUT_FILE="./evidence/KSI-CNA-5.txt"
+OUTPUT_FILE="./evidence/$(basename "$0" .sh).txt"
 
 # Ensure output directory exists
 mkdir -p "$(dirname "$OUTPUT_FILE")"
