@@ -101,7 +101,7 @@ html_content = f"""
     <style>
         body {{ font-family: Arial, sans-serif; margin: 20px; }}
         h1, h2 {{ color: #333; }}
-        table {{ width: 100%; border-collapse: collapse; margin-bottom: 20px; table-layout: fixed; }}
+        table {{ width: 100%; border-collapse: collapse; margin-bottom: 20px; }}
         th, td {{ border: 1px solid #ddd; padding: 8px; text-align: left; word-wrap: break-word; }}
         th {{ background-color: #f2f2f2; }}
         .true-bg_class {{ background-color: #d4edda; }}

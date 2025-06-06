@@ -69,7 +69,7 @@
                      "script": "./script/KSI-CNA-6.sh"
                   }
                ],
-               "note": "Check the AWS Trusted Advisor fault-tolerance-checks (https://docs.aws.amazon.com/awssupport/latest/user/fault-tolerance-checks.html), V4G commit most qualifications"
+               "note": "Check the AWS Trusted Advisor <a href='https://docs.aws.amazon.com/awssupport/latest/user/fault-tolerance-checks.html' target='_blank'>fault-tolerance-checks</a>, V4G commit most qualifications"
             },
             "07": {
                "desc": "Ensure cloud-native information resources are implemented based on host provider\u2019s best practices and documented guidance",
@@ -79,7 +79,7 @@
                      "script": "./script/KSI-CNA-7.sh"
                   }
                ],
-               "note": "V4G hosts on AWS and follows AWS Well-Architected Framework (https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html) to do the implementation"
+               "note": "V4G hosts on AWS and follows <a href='https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html' target='_blank'>AWS Well-Architected Framework</a> to do the implementation"
             }
          }
       },
@@ -156,7 +156,7 @@
                      "script": "./script/KSI-SVC-7.sh"
                   }
                ],
-               "note": "V4G has subscripted AWS 2023 update (https://docs.aws.amazon.com/linux/al2023/ug/receive-update-notification.html) to inform for applying security patches"
+               "note": "V4G has subscripted <a href='https://docs.aws.amazon.com/linux/al2023/ug/receive-update-notification.html' target='_blank'>AWS 2023 update</a> to inform for applying security patches"
             }
          }
       },
