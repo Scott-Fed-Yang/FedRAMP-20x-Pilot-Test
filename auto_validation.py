@@ -23,17 +23,12 @@ method_counter = Counter()
 
 # Process KSI Validation
 for ksi in data["KSI Validation"]:
-    ksi_entry = {
-        "Name": ksi["Name"],
-        "Code": ksi["Code"],
-        "Capabilities": []
-    }
     for cap_key, cap in ksi["Critical Security Capability"].items():
         result = None
         evidence_output = []
 
         if cap["type"] == "script":
-            script_info = cap["ref"][0]  # now always a list of objects with "script"
+            script_info = cap["ref"][0]
             script_path = script_info["script"]
             script_name = os.path.basename(script_path).replace(".sh", "")
             evidence_file = f"./evidence/{script_name}.txt"
@@ -48,7 +43,6 @@ for ksi in data["KSI Validation"]:
                 script_output = process.stdout.strip().splitlines()[-1]
                 result = script_output == "True"
 
-                # Check if evidence file was created
                 if os.path.exists(evidence_file):
                     evidence_output = [{"text": evidence_file, "link": f"{FULL_PATH}/evidence/{script_name}.txt"}]
                 else:
@@ -70,7 +64,9 @@ for ksi in data["KSI Validation"]:
 
         result_counter["True" if result else "False"] += 1
 
-        ksi_entry["Capabilities"].append({
+        ksi_results.append({
+            "KSI_Name": ksi["Name"],
+            "KSI_Code": ksi["Code"],
             "Number": cap_key,
             "Desc": cap["desc"],
             "Type": cap["type"],
@@ -79,8 +75,6 @@ for ksi in data["KSI Validation"]:
             "Evidence": evidence_output
         })
 
-    ksi_results.append(ksi_entry)
-
 # Calculate ratios for executive summary
 total_items = sum(result_counter.values())
 true_ratio = result_counter["True"] / total_items * 100 if total_items else 0
@@ -88,10 +82,8 @@ false_ratio = result_counter["False"] / total_items * 100 if total_items else 0
 auto_ratio = method_counter["Auto Validation"] / total_items * 100 if total_items else 0
 attestation_ratio = method_counter["Attestation"] / total_items * 100 if total_items else 0
 
-# Determine background color for True/False ratio value cell
 result_bg_class = "true-bg_class" if result_counter["False"] == 0 and total_items > 0 else "false-bg_class"
 
-# Generate HTML
 html_content = f"""
 <!DOCTYPE html>
 <html lang=\"en\">
@@ -101,20 +93,14 @@ html_content = f"""
     <style>
         body {{ font-family: Arial, sans-serif; margin: 20px; }}
         h1, h2 {{ color: #333; }}
-        table {{ width: 100%; border-collapse: collapse; margin-bottom: 20px; table-layout: fixed; }}
-        th, td {{ border: 1px solid #ddd; padding: 8px; text-align: left; word-wrap: break-word; }}
+        table {{ width: 100%; border-collapse: collapse; margin-bottom: 20px; }}
+        th, td {{ border: 1px solid #ddd; padding: 8px; text-align: left; }}
         th {{ background-color: #f2f2f2; }}
         .true-bg_class {{ background-color: #d4edda; }}
         .false-bg_class {{ background-color: #f8d7da; }}
         .summary-table td:nth-child(1) {{ width: 20%; }}
         .executive-table td:nth-child(1) {{ width: 50%; }}
         .executive-table td:nth-child(2) {{ width: 50%; }}
-        .ksi-table th:nth-child(1), .ksi-table td:nth-child(1) {{ width: 5%; }}
-        .ksi-table th:nth-child(2), .ksi-table td:nth-child(2) {{ width: 30%; }}
-        .ksi-table th:nth-child(3), .ksi-table td:nth-child(3) {{ width: 15%; }}
-        .ksi-table th:nth-child(4), .ksi-table td:nth-child(4) {{ width: 10%; }}
-        .ksi-table th:nth-child(5), .ksi-table td:nth-child(5) {{ width: 30%; }}
-        .ksi-table th:nth-child(6), .ksi-table td:nth-child(6) {{ width: 10%; }}
     </style>
 </head>
 <body>
@@ -142,28 +128,24 @@ html_content = f"""
     </table>
 
     <h2>Key Security Indicators and Validations</h2>
+    <table class=\"ksi-table\">
+        <tr><th>KSI</th><th>#</th><th>Capability Desc</th><th>Validation Method</th><th>Result</th><th>Note</th><th>Evidence</th></tr>
 """
 
-# Add KSI Validation tables
-for ksi in ksi_results:
+for cap in ksi_results:
+    validation_method = "Auto Validation" if cap["Type"] == "script" else "Attestation"
+    result_text = "True" if cap["Result"] else "False"
+    result_class = "true-bg_class" if cap["Result"] else "false-bg_class"
+
+    evidence_html = ", ".join(
+        f'<a href="{entry["link"]}" target="_blank">{os.path.basename(entry["text"] if "text" in entry else entry["script"])}</a>'
+        if entry.get("link") else entry.get("text", entry.get("script"))
+        for entry in cap["Evidence"]
+    )
+
     html_content += f"""
-    <table class=\"ksi-table\">
-        <tr><th colspan=\"6\">{ksi["Name"]} ({ksi["Code"]})</th></tr>
-        <tr><th>#</th><th>Capability Desc</th><th>Validation Method</th><th>Result</th><th>Note</th><th>Evidence</th></tr>
-    """
-    for cap in ksi["Capabilities"]:
-        validation_method = "Auto Validation" if cap["Type"] == "script" else "Attestation"
-        result_text = "True" if cap["Result"] else "False"
-        result_class = "true-bg_class" if cap["Result"] else "false-bg_class"
-
-        evidence_html = ", ".join(
-            f'<a href="{entry["link"]}" target="_blank">{os.path.basename(entry["text"] if "text" in entry else entry["script"])}</a>'
-            if entry.get("link") else entry.get("text", entry.get("script"))
-            for entry in cap["Evidence"]
-        )
-
-        html_content += f"""
         <tr>
+            <td>{cap["KSI_Name"]} ({cap["KSI_Code"]})</td>
             <td>{cap["Number"]}</td>
             <td>{cap["Desc"]}</td>
             <td>{validation_method}</td>
@@ -171,15 +153,14 @@ for ksi in ksi_results:
             <td>{cap["Note"]}</td>
             <td>{evidence_html}</td>
         </tr>
-        """
-    html_content += "</table>"
+    """
 
 html_content += """
+    </table>
 </body>
 </html>
 """
 
-# Write HTML to file
 with open("ksi_validation_report.html", "w") as f:
     f.write(html_content)
 
