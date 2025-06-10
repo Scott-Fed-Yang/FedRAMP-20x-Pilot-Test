@@ -7,6 +7,7 @@ OUTPUT_FILE="./evidence/$(basename "$0" .sh).txt"
 mkdir -p "$(dirname "$OUTPUT_FILE")"
 
 echo "Listing owned AMIs in current AWS account" > "$OUTPUT_FILE"
+echo "Date: $(date -u)" >> "$OUTPUT_FILE"
 echo "" >> "$OUTPUT_FILE"
 
 aws ec2 describe-images --owners self \

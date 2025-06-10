@@ -1,15 +1,17 @@
 #!/bin/bash
 
 # Configuration
-OUTPUT_FILE="./evidence/$(basename "$0" .sh).txt"
 SCRIPT_BASENAME=$(basename "$0" .sh)
-TEMP_FILE="./evidence/${SCRIPT_BASENAME}-tmp-$$.txt"
+OUTPUT_DIR="./evidence"
+OUTPUT_FILE="${OUTPUT_DIR}/${SCRIPT_BASENAME}.txt"
+TEMP_FILE="${OUTPUT_DIR}/${SCRIPT_BASENAME}-tmp-$$.txt"
 
 # Ensure output directory exists
 mkdir -p "$(dirname "$OUTPUT_FILE")"
 
 # Initialize output file
 echo "EBS Encryption Check Results" > "$OUTPUT_FILE"
+echo "Date: $(date -u)" >> "$OUTPUT_FILE"
 echo "---------------------------" >> "$OUTPUT_FILE"
 
 # Flag to track encryption status

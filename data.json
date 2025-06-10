@@ -19,7 +19,7 @@
                      "script": "./script/KSI-CNA-1.sh"
                   }
                ],
-               "note": "V4G uses AWS Security Group to limit the traffic and the default Security Group denies all traffics"
+               "note": "V4G uses AWS Security Group to limit the traffic. Check the AWS Trusted Advisor <a href='https://docs.aws.amazon.com/awssupport/latest/user/security-checks.html#security-groups-specific-ports-unrestricted' target='_blank'>Security Groups – Specific Ports Unrestricted</a> and <a href='https://docs.aws.amazon.com/awssupport/latest/user/security-checks.html#security-groups-unrestricted-access' target='_blank'>Security Groups – Unrestricted Access</a>, V4G commit most qualifications"
             },
             "02": {
                "desc": "Design systems to minimize the attack surface and minimize lateral movement if compromised",
@@ -69,7 +69,7 @@
                      "script": "./script/KSI-CNA-6.sh"
                   }
                ],
-               "note": "Check the AWS Trusted Advisor <a href='https://docs.aws.amazon.com/awssupport/latest/user/fault-tolerance-checks.html' target='_blank'>fault-tolerance-checks</a>, V4G commit most qualifications"
+               "note": "Check the AWS Trusted Advisor <a href='https://docs.aws.amazon.com/awssupport/latest/user/fault-tolerance-checks.html' target='_blank'>Fault Tolerance Checks</a>, V4G commit most qualifications"
             },
             "07": {
                "desc": "Ensure cloud-native information resources are implemented based on host provider\u2019s best practices and documented guidance",
@@ -106,7 +106,7 @@
                      "script": "./script/KSI-SVC-2.sh"
                   }
                ],
-               "note": "V4G has encrypted the network traffics of all Load balancers and S3 buckets"
+               "note": "V4G has encrypted the network traffics of Application Load balancers, RDS Aurora, Elasticache Redis."
             },
             "03": {
                "desc": "Encrypt all federal and sensitive information at rest",
@@ -116,7 +116,7 @@
                      "script": "./script/KSI-SVC-3.sh"
                   }
                ],
-               "note": "All S3 buckets and RDS instances are encrypted"
+               "note": "V4G has encrypted data on S3 buckets, RDS Aurora and Elasticache Redis."
             },
             "04": {
                "desc": "Manage configuration centrally",
@@ -253,7 +253,7 @@
                      "link": "https://drive.google.com/file/d/1CTcmyYtie7JTbj1R7IuUJyfkdxE7vZ5H/view?usp=drive_link"
                   }
                ],
-               "note": "V4G adopts Sumo Logic (FR#:FR1918740338) to be the SIEM"
+               "note": "V4G adopts Sumo Logic (FR#: <a href='https://marketplace.fedramp.gov/products/FR1918740338' target='_blank'>FR1918740338</a>) to be the SIEM"
             },
             "02": {
                "desc": "Regularly review and audit logs",
@@ -286,7 +286,7 @@
                      "link": "https://drive.google.com/file/d/1FGJSnHPIwE5CO1AH9z5cZFklXdiNh934/view?usp=drive_link"
                   }
                ],
-               "note": "V4G runs the installed agent to run the authenticated vulnerability scanning with Tenable (FR#:FR1814276801)"
+               "note": "V4G runs the installed agent to run the authenticated vulnerability scanning with Tenable (FR#: <a href='https://marketplace.fedramp.gov/products/FR1814276801' target='_blank'>FR1814276801</a>)"
             },
             "05": {
                "desc": "Perform Infrastructure as Code and configuration evaluation and testing",
@@ -301,7 +301,7 @@
                      "link": "https://drive.google.com/file/d/1bNpZd-zIWmTO6cuCNEyel3Emp169aRbB/view?usp=drive_link"
                   }
                ],
-               "note": "V4G adopts TerraForm to be the IaC and monthly runs the Configuration scanning with Tenable (FR#:FR1814276801)"
+               "note": "V4G adopts TerraForm to be the IaC and monthly runs the Configuration scanning with Tenable (FR#: <a href='https://marketplace.fedramp.gov/products/FR1814276801' target='_blank'>FR1814276801</a>)"
             },
             "06": {
                "desc": "Centrally track and prioritize the mitigation and/or remediation of identified vulnerabilities",
@@ -531,7 +531,7 @@
                      "link": "https://drive.google.com/file/d/1twIJ_ChdMK47GyLcq-5ly9D1W6KLUCHw/view?usp=drive_link"
                   }
                ],
-               "note": "V4G has performed and ensured all participants receive and complete the security awareness training with KnowBe4 (FR#:FR2201340492)"
+               "note": "V4G has performed and ensured all participants receive and complete the security awareness training with KnowBe4 (FR#: <a href='https://marketplace.fedramp.gov/products/FR2201340492' target='_blank'>FR2201340492</a>)"
             },
             "02": {
                "desc": "Require role-specific training for high risk roles, including at least roles with privileged access",

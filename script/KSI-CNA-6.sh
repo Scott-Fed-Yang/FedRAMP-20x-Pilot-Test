@@ -10,6 +10,7 @@ mkdir -p "$(dirname "$OUTPUT_FILE")"
 AWS_USE_FIPS_ENDPOINT=false
 
 echo "Trusted Advisor - Fault Tolerance Checks Summary" > "$OUTPUT_FILE"
+echo "Date: $(date -u)" >> "$OUTPUT_FILE"
 echo "" >> "$OUTPUT_FILE"
 
 # List Trusted Advisor checks category = fault_tolerance

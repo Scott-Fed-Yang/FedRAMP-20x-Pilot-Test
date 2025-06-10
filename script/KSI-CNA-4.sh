@@ -8,7 +8,8 @@ mkdir -p "$(dirname "$OUTPUT_FILE")"
 
 # Initialize output file
 echo "IAM Policy Check Results" > "$OUTPUT_FILE"
-echo "-----------------------" >> "$OUTPUT_FILE"
+echo "Date: $(date -u)" >> "$OUTPUT_FILE"
+echo "" >> "$OUTPUT_FILE"
 
 # Flag to track if any policy grants full admin privileges
 has_full_admin=false

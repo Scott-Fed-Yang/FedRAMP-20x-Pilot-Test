@@ -9,6 +9,7 @@ mkdir -p "$(dirname "$OUTPUT_FILE")"
 TARGET_TOPIC="arn:aws:sns:us-east-1:137112412989:amazon-linux-2023-ami-updates"
 
 echo "Verifying SNS subscription to: $TARGET_TOPIC" > "$OUTPUT_FILE"
+echo "Date: $(date -u)" >> "$OUTPUT_FILE"
 echo "" >> "$OUTPUT_FILE"
 
 SUBSCRIPTIONS=$(aws sns list-subscriptions --region us-east-1)
@@ -26,11 +27,11 @@ MATCH_COUNT=$(echo "$SUBSCRIPTIONS" | jq -r --arg topic "$TARGET_TOPIC" '
 
 if [ "$MATCH_COUNT" -gt 0 ]; then
   echo "" >> "$OUTPUT_FILE"
-  echo "✅ Subscription(s) found for $TARGET_TOPIC." >> "$OUTPUT_FILE"
+  echo "Subscription(s) found for $TARGET_TOPIC." >> "$OUTPUT_FILE"
   echo "True"
   exit 0
 else
-  echo "❌ No subscriptions found for $TARGET_TOPIC." >> "$OUTPUT_FILE"
+  echo "No subscriptions found for $TARGET_TOPIC." >> "$OUTPUT_FILE"
   echo "False"
   exit 1
 fi

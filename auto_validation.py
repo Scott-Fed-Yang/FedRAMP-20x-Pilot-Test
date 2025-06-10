@@ -127,7 +127,7 @@ html_content = f"""
             <th>CSP</th><th>CSO</th><th>Impact Level</th><th>Package ID</th>
         </tr>
         <tr>
-            <td>{data["CSP Summary"]["CSP"]}</td><td>{data["CSP Summary"]["CSO"]}</td><td>{data["CSP Summary"]["FedRAMP Impact Level"]}</td><td>{data["CSP Summary"]["FedRAMP Package ID"]}</td>
+            <td>{data["CSP Summary"]["CSP"]}</td><td>{data["CSP Summary"]["CSO"]}</td><td>{data["CSP Summary"]["FedRAMP Impact Level"]}</td><td><a href='https://marketplace.fedramp.gov/products/{data["CSP Summary"]["FedRAMP Package ID"]}' target='_blank'>{data["CSP Summary"]["FedRAMP Package ID"]}</a></td>
         </tr>
         <tr><td colspan=\"4\"><strong>System Description</strong></td></tr>
         <tr><td colspan=\"4\">{data["CSP Summary"]["System Description"]}</td></tr>

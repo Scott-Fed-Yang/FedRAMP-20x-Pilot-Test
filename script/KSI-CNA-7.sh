@@ -22,7 +22,8 @@ fi
 RESULT=$(aws support describe-trusted-advisor-check-result --check-id "$CHECK_ID" --language en)
 STATUS=$(echo "$RESULT" | jq -r '.result.status')
 
-echo "Trusted Advisor Check: AWS Well-Architected high risk issues for reliability" > "$OUTPUT_FILE"
+echo "Trusted Advisor Check: $CHECK_NAME" > "$OUTPUT_FILE"
+echo "Date: $(date -u)" >> "$OUTPUT_FILE"
 echo "ID: $CHECK_ID" >> "$OUTPUT_FILE"
 echo "Result: $RESULT" >> "$OUTPUT_FILE"
 
