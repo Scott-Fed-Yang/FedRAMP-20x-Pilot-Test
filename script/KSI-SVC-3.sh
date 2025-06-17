@@ -150,7 +150,7 @@ fi
 # Final Encryption Status
 # ---------------------------
 if [ $ALL_ENCRYPTED -eq 1 ]; then
-  echo "true"
+  echo "True"
 else
-  echo "false"
+  echo "False"
 fi
