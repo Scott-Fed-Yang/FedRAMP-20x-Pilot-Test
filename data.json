@@ -43,23 +43,57 @@
             },
             "04": {
                "desc": "Use immutable infrastructure with strictly defined functionality and privileges by default",
-               "type": "script",
+               "type": "attestation",
                "ref": [
                   {
-                     "script": "./script/KSI-CNA-4.sh"
+                     "text": "KSI-CNA-4-Instance Profile.png",
+                     "link": "https://drive.google.com/file/d/1_R0OD5w3A0Zy4M9enmuISRSORB9kFlBO/view?usp=drive_link"
+                  },
+                  {
+                     "text": "KSI-CNA-4-Git Commit-IaC.png",
+                     "link": "https://drive.google.com/file/d/1VkIBUSw9dnozyz5Rrb7DEgPkXyBK2gWE/view?usp=drive_link"
+                  },
+                  {
+                     "text": "KSI-CNA-4-Git Commit-Packer.png",
+                     "link": "https://drive.google.com/file/d/1bgB1K-sg9phNCoSoyXki_xfMlGEySZHQ/view?usp=drive_link"
+                  },
+                  {
+                     "text": "KSI-CNA-4-Github Action.png",
+                     "link": "https://drive.google.com/file/d/1-hBNAmaqaVyKY4eEuJmuJn_d86fcLYAB/view?usp=drive_link"
+                  },
+                  {
+                     "text": "KSI-CNA-4-AWS Code Deploy.png",
+                     "link": "https://drive.google.com/file/d/12huBPSaxGp4b3xr2ImlEu3S2aJayR5yi/view?usp=drive_link"
                   }
                ],
-               "note": "Check the AWS IAM policy to guarantee each policy has been defined functionality and privileges."
+               "note": "V4G utilizes Terraform Infrastructure as Code (IaC) to manage infrastructure and Packer to build immutable AWS AMIs. Each application runs on a dedicated instance profile with least privilege. GitHub Actions are used to implement Blue/Green deployments through CI/CD pipelines, ensuring consistent and controlled rollout."
             },
             "05": {
                "desc": "Have denial of service protection",
-               "type": "script",
+               "type": "attestation",
                "ref": [
                   {
-                     "script": "./script/KSI-CNA-5.sh"
+                     "text": "KSI-CNA-5-WAF.png",
+                     "link": "https://drive.google.com/file/d/1kWHx2dJIpvys4srwwnkGbrHUybfCYeJz/view?usp=drive_link"
+                  },
+                  {
+                     "text": "KSI-CNA-5-WAF-GeoLimit.png",
+                     "link": "https://drive.google.com/file/d/1s165x9LTfnmbm1eqU8XoI-5FpmwbZ0n2/view?usp=drive_link"
+                  },
+                  {
+                     "text": "KSI-CNA-5-WAF-Log.png",
+                     "link": "https://drive.google.com/file/d/1cjS_xKMeJBEX_cvrD2qVMs8igXXDUP1I/view?usp=drive_link"
+                  },
+                  {
+                     "text": "KSI-CNA-5-Route53.png",
+                     "link": "https://drive.google.com/file/d/1-QbMENKccbpqCMxolmH2EvgBlK0jJ9JB/view?usp=drive_link"
+                  },
+                  {
+                     "text": "KSI-CNA-5-CloudFront.png",
+                     "link": "https://drive.google.com/file/d/1czfGeil-eWyD90vgrTJu_64FzkthFxER/view?usp=drive_link"
                   }
                ],
-               "note": "AWS CloudFront is enabled to prevent from DoS attack"
+               "note": "V4G benefits from AWS Shield Standard, which provides automatic protection against common DDoS attacks at the network and transport layers. The architecture follows AWS <a href='https://docs.aws.amazon.com/whitepapers/latest/aws-best-practices-ddos-resiliency/aws-best-practices-ddos-resiliency.html'>best practices for DDoS resiliency</a>, including using Amazon CloudFront, Route 53, and WAF to provide additional layers of protection. These measures help to ensure high availability and mitigate denial-of-service threats effectively."
             },
             "06": {
                "desc": "Design systems for high availability and rapid recovery",
@@ -92,8 +126,12 @@
                "type": "attestation",
                "ref": [
                   {
-                     "text": "KSI-SVC-1.pdf",
+                     "text": "KSI-SVC-1-AL2023.pdf",
                      "link": "https://drive.google.com/file/d/1r6g37KjLcRy3CzDAFzB-0o2tEM23YBlY/view?usp=drive_link"
+                  },
+                  {
+                     "text": "KSI-SVC-1-AWS Foundation.pdf",
+                     "link": "https://drive.google.com/file/d/1WUP29o3FSi4A6qDCzfrSDHQJoQttDyxp/view?usp=drive_link"
                   }
                ],
                "note": "V4G hardens the configuration based on CIS benchmark and montly reviews the configuration with Tanable"
@@ -116,17 +154,34 @@
                      "script": "./script/KSI-SVC-3.sh"
                   }
                ],
-               "note": "V4G has encrypted data on S3 buckets, RDS Aurora and Elasticache Redis."
+               "note": "V4G has encrypted data on S3 buckets, RDS Aurora, Elasticache Redis, the image files and all backup database snapshots."
             },
             "04": {
                "desc": "Manage configuration centrally",
-               "type": "script",
+               "type": "attestation",
                "ref": [
                   {
-                     "script": "./script/KSI-SVC-4.sh"
+                     "text": "KSI-SVC-4-Packer Repo.png",
+                     "link": "https://drive.google.com/file/d/1HDUJZJlyjdg6GtefRryQSq4SI3COV4VT/view?usp=drive_link"
+                  },
+                  {
+                     "text": "KSI-SVC-4-AMI.png",
+                     "link": "https://drive.google.com/file/d/1zSXl8703asDpJ123D42bs7tQFDfJ3_Wb/view?usp=drive_link"
+                  },
+                  {
+                     "text": "KSI-SVC-4-Git Commit-IaC.png",
+                     "link": "https://drive.google.com/file/d/1Ckos2rBzweG60FaR5eZB_uJbFI5DFoj-/view?usp=drive_link"
+                  },
+                  {
+                     "text": "KSI-SVC-4-AWS SSM Parameter.png",
+                     "link": "https://drive.google.com/file/d/16AQRRtTZg4kAcDecQMqs1x53tlmVKbrd/view?usp=drive_link"
+                  },
+                  {
+                     "text": "KSI-SVC-4-AWS Config.png",
+                     "link": "https://drive.google.com/file/d/1Gm-IdzRrO0tFtbwEPyxQ6akrgd4Sxb2A/view?usp=drive_link"
                   }
                ],
-               "note": "V4G uses Packer build AWS Amazon Machine Images (AMIs) to manage the configured images"
+               "note": "V4G centrally manages infrastructure and application configurations using a combination of tools and AWS services:<br>1. Packer: used to build immutable and standardized AWS AMI<br>2.Terraform: used to consistently provision infrastructure and enforce configuration baselines.<br>3.AWS SSM Parameter: use to centrally store and retrieve parameters at runtime.<br>4. AWS Config: is enabled to continuously monitor and record configuration changes."
             },
             "05": {
                "desc": "Enforce system and information resource integrity through cryptographic means",
@@ -150,13 +205,18 @@
             },
             "07": {
                "desc": "Use a consistent, risk-informed approach for applying security patches",
-               "type": "script",
+               "type": "attestation",
                "ref": [
                   {
-                     "script": "./script/KSI-SVC-7.sh"
+                     "text": "KSI-SVC-7-AL2023 Update.png",
+                     "link": "https://drive.google.com/file/d/1Z57mgDbrbqkQE-0U1FkuGPUI-tVD3zOn/view?usp=drive_link"
+                  },
+                  {
+                     "text": "KSI-SVC-7-V4G Security Tracker.pdf",
+                     "link": "https://drive.google.com/file/d/1NIwnuTIvMc0mJXRJEFFNZ2SDZRtBmiuV/view?usp=drive_link"
                   }
                ],
-               "note": "V4G has subscripted <a href='https://docs.aws.amazon.com/linux/al2023/ug/receive-update-notification.html' target='_blank'>AWS 2023 update</a> to inform for applying security patches"
+               "note": "V4G has subscripted <a href='https://docs.aws.amazon.com/linux/al2023/ug/receive-update-notification.html' target='_blank'>AWS Linux 2023 update</a> to inform for applying security patches, and uses a Security Tracker to guarantee the deployment is controlled"
             }
          }
       },
@@ -221,22 +281,26 @@
                "type": "attestation",
                "ref": [
                   {
-                     "text": "KSI-IAM-5.pdf",
-                     "link": "https://drive.google.com/file/d/1KdXmj3W-xJZi0ciaM_klTlgQadwb1_6R/view?usp=drive_link"
+                     "text": "KSI-IAM-5-DeepSecurity.pdf",
+                     "link": "https://drive.google.com/file/d/1-fYyNsoT5F81L027prG1aepBejWqUGQN/view?usp=drive_link"
                   }
                ],
-               "note": "V4G follows AWS document to implement the Zero Trust Design principle"
+               "note": "V4G follows AWS document to implement the Zero Trust Design principle and the following are implemented:<br>1. Strong Authentication (refer to KSI-IAM-2)<br>2. Least Privileges Access (refer to KSI-IAM-4)<br>3. Micro Segmentation (refer to KSI-CNA-2)<br>4. Full Encryption (refer to KSI-SVC-2, KSI-SVC-3)<br>5. Endpoint Security<br>6. Logging and Alert Automated Policy Enforcement(refer to KSI-MLA-1)"
             },
             "06": {
                "desc": "Automatically disable or otherwise secure accounts with privileged access in response to suspicious activity",
                "type": "attestation",
                "ref": [
                   {
-                     "text": "NA",
-                     "link": null
+                     "text": "KSI-IAM-6-SumoLogic.png",
+                     "link": "https://drive.google.com/file/d/1Ewfxg6H-FI-6WK6vHmT2BCyzLgnaDboL/view?usp=drive_link"
+                  },
+                  {
+                     "text": "KSI-IAM-6-CloudWatch.png",
+                     "link": "https://drive.google.com/file/d/1TQJ7bvoU_5BlEJmdHPTaM8F2ciDn9hyq/view?usp=drive_link"
                   }
                ],
-               "note": "V4G hosts on AWS and adopts Google Workspace to be the document repository, the account management is inherited from the security control of each side"
+               "note": "V4G hosts on AWS and adopts Google Workspace to be the document repository, the automation management is inherited from the security control of each side. Moreover, V4G has adopted Sumo Logic (FR#: <a href='https://marketplace.fedramp.gov/products/FR1918740338' target='_blank'>FR1918740338</a>) and AWS CloudWatch to detect the abnormal account behaviors"
             }
          }
       },
@@ -282,11 +346,11 @@
                "type": "attestation",
                "ref": [
                   {
-                     "text": "KSI-MLA-4.png",
-                     "link": "https://drive.google.com/file/d/1FGJSnHPIwE5CO1AH9z5cZFklXdiNh934/view?usp=drive_link"
+                     "text": "KSI-MLA-4.pdf",
+                     "link": "https://drive.google.com/file/d/1DWN86l0yNOaHrXZFU6lcej3U4ETsnhpw/view?usp=drive_link"
                   }
                ],
-               "note": "V4G runs the installed agent to run the authenticated vulnerability scanning with Tenable (FR#: <a href='https://marketplace.fedramp.gov/products/FR1814276801' target='_blank'>FR1814276801</a>)"
+               "note": "V4G runs the installed agent to run the authenticated vulnerability scanning with Tenable (FR#: <a href='https://marketplace.fedramp.gov/products/FR1814276801' target='_blank'>FR1814276801</a>), the installed agent runs credentialed checks to guarantee the uthenticated vulnerability scanning"
             },
             "05": {
                "desc": "Perform Infrastructure as Code and configuration evaluation and testing",
@@ -615,11 +679,15 @@
                "type": "attestation",
                "ref": [
                   {
-                     "text": "KSI-INR-2.pdf",
+                     "text": "KSI-INR-2-IRF.pdf",
                      "link": "https://drive.google.com/file/d/1HR8TJWbBPrReKvN46Grx83LqCPAOR_xW/view?usp=drive_link"
+                  },
+                  {
+                     "text": "KSI-INR-2-SumoLogic.png",
+                     "link": "https://drive.google.com/file/d/1XYXKpkUU4MAwyfcz2TGNM5sLy1BbHdFT/view?usp=drive_link"
                   }
                ],
-               "note": "V4G has documented the Incident Response Form and asked to maintrain the log of incidents"
+               "note": "V4G has documented the Incident Response Form and asked to maintrain the log of incidents, also review the incident escalated by Sumo Logic (FR#: <a href='https://marketplace.fedramp.gov/products/FR1918740338' target='_blank'>FR1918740338</a>)"
             },
             "03": {
                "desc": "Generate after action reports and regularly incorporate lessons learned into operations",

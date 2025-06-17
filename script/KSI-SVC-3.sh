@@ -4,11 +4,12 @@
 SCRIPT_BASENAME=$(basename "$0" .sh)
 OUTPUT_DIR="./evidence"
 OUTPUT_FILE="${OUTPUT_DIR}/${SCRIPT_BASENAME}.txt"
+ALL_ENCRYPTED=1  # Track if all encryption checks are true (1=true, 0=false)
 
 # Ensure output directory exists
 mkdir -p "$(dirname "$OUTPUT_FILE")"
 
-echo "Encryption at-rest Check Results" >> "$OUTPUT_FILE"
+echo "Encryption at-rest Check Results" > "$OUTPUT_FILE"
 echo "Generated at: $(date -u)" >> "$OUTPUT_FILE"
 echo "" >> "$OUTPUT_FILE"
 
@@ -29,6 +30,7 @@ for bucket in $(aws s3api list-buckets --query 'Buckets[*].Name' --output text);
   else
     type="None"
     arn="N/A"
+    ALL_ENCRYPTED=0  # Mark as false if any bucket is unencrypted
   fi
 
   entry=$(cat <<EOF
@@ -48,7 +50,6 @@ EOF
 done
 echo "]" >> "$OUTPUT_FILE"
 
-
 AWS_USE_FIPS_ENDPOINT=true
 
 # ---------------------------
@@ -62,6 +63,10 @@ for cluster_id in $(aws rds describe-db-clusters --query 'DBClusters[*].DBCluste
   info=$(aws rds describe-db-clusters --db-cluster-identifier "$cluster_id" --query 'DBClusters[0]' --output json)
   encrypted=$(echo "$info" | jq -r '.StorageEncrypted')
   kmskey=$(echo "$info" | jq -r '.KmsKeyId // "N/A"')
+
+  if [ "$encrypted" != "true" ]; then
+    ALL_ENCRYPTED=0  # Mark as false if any cluster is unencrypted
+  fi
 
   entry=$(cat <<EOF
 {
@@ -92,11 +97,15 @@ for group_id in $(aws elasticache describe-replication-groups --query 'Replicati
   encrypted=$(echo "$info" | jq -r '.AtRestEncryptionEnabled')
   keyid=$(echo "$info" | jq -r '.KmsKeyId // "N/A"')
 
+  if [ "$encrypted" != "true" ]; then
+    ALL_ENCRYPTED=0  # Mark as false if any Redis cache is unencrypted
+  fi
+
   entry=$(cat <<EOF
 {
   "RedisCacheName": "$group_id",
   "EncryptionAtRest": $encrypted,
-  "EncryptionKey": "$keyid",
+  "EncryptionKey": "$keyid"
 }
 EOF
 )
@@ -109,4 +118,39 @@ EOF
 done
 echo "]" >> "$OUTPUT_FILE"
 
-echo "True"
+# ---------------------------
+# EC2 AMI Encryption Check
+# ---------------------------
+echo "" >> "$OUTPUT_FILE"
+echo "EC2 AMI Encryption Check" >> "$OUTPUT_FILE"
+ami_output=$(aws ec2 describe-images --query 'Images[*].{ImageId:ImageId, DeviceName:BlockDeviceMappings[*].{DeviceName:DeviceName, Encrypted:Ebs.Encrypted}}' --filters 'Name=is-public,Values=false' --output json)
+echo "$ami_output" >> "$OUTPUT_FILE"
+
+# Check if all EBS volumes in AMIs are encrypted
+ami_encrypted=$(echo "$ami_output" | jq -r '.[] | .DeviceName[] | .Encrypted' | grep -v "true")
+if [ -n "$ami_encrypted" ]; then
+  ALL_ENCRYPTED=0  # Mark as false if any EBS volume is unencrypted
+fi
+
+# ---------------------------
+# RDS DB Cluster Snapshot Encryption Check
+# ---------------------------
+echo "" >> "$OUTPUT_FILE"
+echo "RDS DB Cluster Snapshot Encryption Check" >> "$OUTPUT_FILE"
+snapshot_output=$(aws rds describe-db-cluster-snapshots --query 'DBClusterSnapshots[*].{DBClusterSnapshotIdentifier:DBClusterSnapshotIdentifier, StorageEncrypted:StorageEncrypted}' --output json)
+echo "$snapshot_output" >> "$OUTPUT_FILE"
+
+# Check if all snapshots are encrypted
+snapshot_encrypted=$(echo "$snapshot_output" | jq -r '.[] | .StorageEncrypted' | grep -v "true")
+if [ -n "$snapshot_encrypted" ]; then
+  ALL_ENCRYPTED=0  # Mark as false if any snapshot is unencrypted
+fi
+
+# ---------------------------
+# Final Encryption Status
+# ---------------------------
+if [ $ALL_ENCRYPTED -eq 1 ]; then
+  echo "true"
+else
+  echo "false"
+fi
