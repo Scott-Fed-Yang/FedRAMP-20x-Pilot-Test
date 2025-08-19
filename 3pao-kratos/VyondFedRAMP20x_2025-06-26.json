@@ -1,0 +1,1084 @@
+﻿{
+    "CSPSummary": {
+        "CSP": "GoAnimate",
+        "CSO": "Vyond for Government (V4G)",
+        "FedRAMPID": "FR2433985791",
+        "FedRAMPImpactLevel": "Low Impact",
+        "SystemDescription": "Vyond is the only all-in-one video creation platform built for business and government organizations. With a focus on privacy and security, simplicity of use, and powerful video creation, Vyond for Government grants federal and public sector agencies access to our flagship platform, enabling transformation of critical information into engaging videos for employees, partners, and constituents - effectively and at scale."
+    },
+    "Metadata": {
+        "Framework": "20xP1",
+        "AssessmentYear": "2025",
+        "AssessmentStart": "2025-05-28",
+        "AssessmentEnd": "2025-06-18",
+        "ValidationStatus": {
+            "ValidationImplemented": 51,
+            "ValidationPartial": 0,
+            "ValidationPendingAdditionalEvidence": 0,
+            "ValidationNotImplemented": 0,
+            "ValidationTotal": 51
+        },
+        "DocumentVersion": "Public-1.0",
+        "LastModified": "2025-06-26 12:05:41"
+    },
+    "AssessorSummary": {
+        "AssessorOrg": "Kratos",
+        "LeadAssessor": "Kenneth Ndam",
+        "AssessorRecommendation": "Recommended for FedRAMP20x ATO at Low Baseline"
+    },
+    "KSIs": [
+        {
+            "KSI": "Cloud Native Architecture",
+            "ShortName": "KSI-CNA",
+            "Validations": [
+                {
+                    "ValidationID": "KSI-CNA-01",
+                    "Requirement": "Configure ALL information resources to limit inbound and outbound traffic",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G uses AWS Security Group to limit the traffic. Check the AWS Trusted Advisor Security Groups \u2013 Specific Ports Unrestricted and Security Groups \u2013 Unrestricted Access, V4G commit most qualifications",
+                            "EvidenceSource": "script"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "57769ab7-d02b-4d83-9323-2adf3e841699"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-CNA-02",
+                    "Requirement": "Design systems to minimize the attack surface and minimize lateral movement if compromised",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "Inventory all EC2 hosts to guarantee all hosts are segmented by VPC to minimize lateral movement if compromised",
+                            "EvidenceSource": "script"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "9f909433-98e4-4860-a925-d5fcb57b8e50"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-CNA-03",
+                    "Requirement": "Use logical networking and related capabilities to enforce traffic flow controls",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "Confirm all hosts are attached to at least 1 security group to guarantee the traffic flow is enforced by the cloud native network",
+                            "EvidenceSource": "script"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "123b2d53-a456-4f8b-8cd7-9dd16af1f73f"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-CNA-04",
+                    "Requirement": "Use immutable infrastructure with strictly defined functionality and privileges by default",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G utilizes Terraform Infrastructure as Code (IaC) to manage infrastructure and Packer to build immutable AWS AMIs. Each application runs on a dedicated instance profile with least privilege. GitHub Actions are used to implement Blue/Green deployments through CI/CD pipelines, ensuring consistent and controlled roll out",
+                            "EvidenceSource": "script"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "Additional evidence provided meets the intent of the KSI",
+                            "EvidenceEvaluated": [
+                                "3344ba9c-93ce-41e6-ab6c-36d7e6e705d3",
+                                "6e7c5e1a-3a65-436a-9099-8ba85325d9c4",
+                                "a9429299-6dda-4e0b-ba03-90dd8c4cdf88",
+                                "ce240251-53e4-476b-ad5c-e8e8a9ed9e06",
+                                "b4e336b5-ab49-4c51-8b17-d9901f57d4c6",
+                                "5687a588-25f2-4bcb-ab93-d5fb6d29a24f"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-CNA-05",
+                    "Requirement": "Have denial of service protection",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G benefits from AWS Shield Standard, which provides automatic protection against common DDoS attacks at the network and transport layers. The architecture follows AWS\u00a0best practices for DDoS resiliency, including using Amazon CloudFront, Route 53, and WAF to provide additional layers of protection. These measures help to ensure high availability and mitigate denial-of-service threats effectively.",
+                            "EvidenceSource": "script"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "Additional evidence provided meets the intent of the KSI",
+                            "EvidenceEvaluated": [
+                                "7abfd6e3-3e80-44e4-949e-c309b9405678",
+                                "f207323a-84dd-468f-b83d-938937026f85",
+                                "95a361f1-4bd1-4321-907e-87bbe795c1f3",
+                                "77239448-bb50-4316-8727-33dd9e24872c",
+                                "507b22f5-3aa4-49bc-8826-35cd69d0b3d2",
+                                "74dd0766-ee50-4541-8a85-1e248d05a9b4"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-CNA-06",
+                    "Requirement": "Design systems for high availability and rapid recovery",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "Check the AWS Trusted Advisor Fault Tolerance Checks, V4G commit most qualifications",
+                            "EvidenceSource": "script"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "0f46e3f2-5423-4c95-8586-4b74517bab36"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-CNA-07",
+                    "Requirement": "Ensure cloud-native information resources are implemented based on host provider\u00e2\u0080\u0099s best practices and documented guidance",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G hosts on AWS and follows AWS Well-Architected Framework to do the implementation",
+                            "EvidenceSource": "script"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "85165876-619b-4652-8b26-f2b1d2846d72"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "KSI": "Service Configuration",
+            "ShortName": "KSI-SVC",
+            "Validations": [
+                {
+                    "ValidationID": "KSI-SVC-01",
+                    "Requirement": "Harden and review network and system configurations",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G hardens the configuration based on CIS benchmark and montly reviews the configuration with Tenable",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "Additional evidence provided meets the intent of the KSI",
+                            "EvidenceEvaluated": [
+                                "d11f43d1-c7d2-4399-87ca-e14725d96f0c",
+                                "704622dc-d5e6-4bb4-bf68-d75f9714e3ef"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-SVC-02",
+                    "Requirement": "Encrypt or otherwise secure network traffic",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G has encrypted the network traffic of Application Load balancers, RDS Aurora, Elasticache Redis.",
+                            "EvidenceSource": "script"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "12f80f0d-f5cb-4dc2-adc1-3464040354b9"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-SVC-03",
+                    "Requirement": "Encrypt all federal and sensitive information at rest",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G has encrypted data on S3 buckets, RDS Aurora, Elasticache Redis, the image files and all backup database snapshots.",
+                            "EvidenceSource": "script"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "Additional evidence provided meets the intent of the KSI",
+                            "EvidenceEvaluated": [
+                                "c0df2194-c157-4c58-87fc-ed23653567b6"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-SVC-04",
+                    "Requirement": "Manage configuration centrally",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G centrally manages infrastructure and application configurations using a combination of tools and AWS services:\n1. Packer: used to build immutable and standardized AWS AMI\n2.Terraform: used to consistently provision infrastructure and enforce configuration baselines.\n3.AWS SSM Parameter: use to centrally store and retrieve parameters at runtime.\n4. AWS Config: is enabled to continuously monitor and record configuration changes.",
+                            "EvidenceSource": "script"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "Additional evidence provided meets the intent of the KSI",
+                            "EvidenceEvaluated": [
+                                "99e3e6c3-8647-4b45-889a-6aa4a26178eb",
+                                "ac41c9a8-90c6-4f4d-9cd5-20f543a76b25",
+                                "f37031a9-4540-4f2d-bfbf-75410b250089",
+                                "21c40982-0d4f-4b4a-aa2c-6531352a6c8b",
+                                "29693085-fa37-4f25-89f3-e079d3d475fa",
+                                "1b69f06a-bb27-4ca4-96b7-059689a24361"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-SVC-05",
+                    "Requirement": "Enforce system and information resource integrity through cryptographic means",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G has encrypted all AWS EBS to store the image",
+                            "EvidenceSource": "script"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "6c29fc45-e183-4846-8117-a431642334ac"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-SVC-06",
+                    "Requirement": "Use automated key management systems to manage, protect, and regularly rotate digital keys and certificates",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G uses AWS Key Management Service to manage and automatically rotate the key",
+                            "EvidenceSource": "script"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "bf308688-c55f-48d0-861e-b6d1dc3ca05d"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-SVC-07",
+                    "Requirement": "Use a consistent, risk-informed approach for applying security patches",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G has subscribed to AWS Linux 2023 update to inform for applying security patches, and uses a Security Tracker to guarantee the deployment is controlled",
+                            "EvidenceSource": "script"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "Additional evidence provided meets the intent of the KSI",
+                            "EvidenceEvaluated": [
+                                "454474f0-4272-4733-bf59-075cd999c248",
+                                "f542c625-0eb4-4438-9264-4fab87a82423",
+                                "2b128c1e-9ac2-4d37-bd0d-1617e591debb"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "KSI": "Identity and Access Management",
+            "ShortName": "KSI-IAM",
+            "Validations": [
+                {
+                    "ValidationID": "KSI-IAM-01",
+                    "Requirement": "Enforce multi-factor authentication (MFA) using methods that are difficult to intercept or impersonate (phishing-resistant MFA) for all user authentication",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G has enforced YubiKey 5 FIPS Series (CMVP #3914) to be the MFA device of AWS and Google Identity (the other external service must SSO with Google Identity) to guarantee phishing-resistance",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "ba13449e-6367-485c-bde6-10bceca91e95",
+                                "ef9c179a-74e9-4919-984d-658beecb922e"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-IAM-02",
+                    "Requirement": "Use secure passwordless methods for user authentication and authorization when feasible, otherwise enforce strong passwords with MFA",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G has enforced strong passwords for users, and the other external service must SSO with Google Identity",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "80df3b8d-e792-44fc-ad6c-df321dec2c5a",
+                                "0514b765-0051-4c4c-be5e-a8e0eb90f8ac"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-IAM-03",
+                    "Requirement": "Enforce appropriately secure authentication methods for non-user accounts and services",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G does not allows the non-user accounts/services to do the console login",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "dfecdafb-11d7-4f6b-8c4a-626a66228ead"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-IAM-04",
+                    "Requirement": "Use a least-privileged, role and attribute-based, and just-in-time security authorization model for all user and non-user accounts and services",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G follows the Separation of Duties Matrix to fulfill the requirement",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "a2531f1e-3b59-47e5-ac01-171b832bc297"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-IAM-05",
+                    "Requirement": "Apply zero trust design principles",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G follows AWS document to implement the Zero Trust Design principle and the following are implemented:\n1. Strong Authentication (refer to KSI-IAM-2)\n2. Least Privileges Access (refer to KSI-IAM-4)\n3. Micro Segmentation (refer to KSI-CNA-2)\n4. Full Encryption (refer to KSI-SVC-2, KSI-SVC-3)\n5. Endpoint Security\n6. Logging and Alert Automated Policy Enforcement(refer to KSI-MLA-1)",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "Additional evidence provided meets the intent of the KSI",
+                            "EvidenceEvaluated": [
+                                "4683c10f-4c0a-4482-a20b-0ca3e2f198d6"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-IAM-06",
+                    "Requirement": "Automatically disable or otherwise secure accounts with privileged access in response to suspicious activity",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G hosts on AWS and adopts Google Workspace to be the document repository, the automation management is inherited from the security control of each side. Moreover, V4G has adopted Sumo Logic (FR#: FR1918740338) and AWS CloudWatch to detect the abnormal account behaviors",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "Additional evidence provided meets the intent of the KSI",
+                            "EvidenceEvaluated": [
+                                "d4318896-27d1-4d7a-93fd-2f83dd08b3ed",
+                                "1bbff8ef-078a-4d15-bae3-839fd96e1b51"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "KSI": "Monitoring, Logging, and Auditing",
+            "ShortName": "KSI-MLA",
+            "Validations": [
+                {
+                    "ValidationID": "KSI-MLA-01",
+                    "Requirement": "Operate a Security Information and Event Management (SIEM) or similar system(s) for centralized, tamper-resistent logging of events, activities, and changes",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G adopts Sumo Logic (FR#: FR1918740338) to be the SIEM",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "7ec6ae61-f792-4e8f-841d-9c49a25b07cb"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-MLA-02",
+                    "Requirement": "Regularly review and audit logs",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "Sumo Logic helps to review and analyze the log immediately and V4G runs the investigation for the suspicious behaviors when occurred",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "be102d9c-7b50-4762-9c39-fcc8bf590be1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-MLA-03",
+                    "Requirement": "Rapidly detect and remediate or mitigate vulnerabilities",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G follows the procedure (the section 'Flaw Remediation') to remediate the vulnerability based on 30 (High) - 90 (Moderate) - 180 (Low) days principle",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "4ca5837f-2027-42e5-a18f-f7f61a523eb5"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-MLA-04",
+                    "Requirement": "Perform authenticated vulnerability scanning on information resources",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G runs the installed agent to run the authenticated vulnerability scanning with Tenable (FR#:FR1814276801), the installed agent runs credentialed checks to guarantee the uthenticated vulnerability scanning",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "Evidence provided mentions authentication being used, however, was not able to validate authentication marked to Yes on the evidence file c43ccaff-5f6a-4e99-a54d-a8d9f3eb6d7b as shown during last session.",
+                            "EvidenceEvaluated": [
+                                "c43ccaff-5f6a-4e99-a54d-a8d9f3eb6d7b"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-MLA-05",
+                    "Requirement": "Perform Infrastructure as Code and configuration evaluation and testing",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G adopts TerraForm to be the IaC and monthly runs the Configuration scanning with Tenable (FR#: FR1814276801)",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "ce24173c-4fb1-45da-9b17-96f1d1ef87a7",
+                                "f55f7b75-e613-4651-9d4d-465e89d29492"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-MLA-06",
+                    "Requirement": "Centrally track and prioritize the mitigation and/or remediation of identified vulnerabilities",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G follows FedRAMP requirements and adopts the POA&M sheet to centrally track and prioritize the remediation of identified vulnerabilities",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "b800728e-e05c-44e4-89aa-9c5a06d3d357"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "KSI": "Change Management",
+            "ShortName": "KSI-CMT",
+            "Validations": [
+                {
+                    "ValidationID": "KSI-CMT-01",
+                    "Requirement": "Log and monitor system modifications",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G adopts on-premise Trend Micro Deep Security to monitor system modifications",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "7964ffdd-83b4-4303-a829-004bc15dd335"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-CMT-02",
+                    "Requirement": "Execute changes though redeployment of version controlled immutable resources rather than direct modification wherever possible",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G adopts Blue-Green Deployment strategy and all hosts are immutable and relaunched with the new version of the image per monthly deployment",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "4ecc9cb4-5f72-4912-89c7-cb024b273f9c"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-CMT-03",
+                    "Requirement": "Implement automated testing and validation of changes prior to deployment",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G has executed the automation process to test and verify the change per deployment",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "bc0bf4b2-08d2-4bcf-ab2a-3463f1340fd8"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-CMT-04",
+                    "Requirement": "Have a documented change management procedure",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G has followed FedRAMP requirements to document the change management procedure, all change requirements must follow the procedure",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "cd64a78a-626a-4d75-877e-7d18f783c629"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-CMT-05",
+                    "Requirement": "Evaluate the risk and potential impact of any change",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G has evaluated the risk and potential impact of each change",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "61603b8d-068b-497b-8027-5e95134acd6d",
+                                "5bf77046-5728-445d-9182-5b44fea5430b"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "KSI": "Policy and Inventory",
+            "ShortName": "KSI-PIY",
+            "Validations": [
+                {
+                    "ValidationID": "KSI-PIY-01",
+                    "Requirement": "Have an up-to-date information resource inventory or code defining all deployed assets, software, and services",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G runs the asset inventory for each deployment and modification",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "1756407b-ba1c-4516-aaf2-934c7f90d285"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-PIY-02",
+                    "Requirement": "Have policies outlining the security objectives of all information resources",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G has outlined the security objective as the commitment in the policy",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "3814d614-b1c6-4dbe-a4b4-6dfab18d9432"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-PIY-03",
+                    "Requirement": "Maintain a vulnerability disclosure program",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "The vulnerability disclosure program is maintained and published in the help center",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "84a2b93a-b0ea-429b-881e-fc14d9b3428b"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-PIY-04",
+                    "Requirement": "Build security considerations into the Software Development Lifecycle and align with CISA Secure By Design principles",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "The SDLC is documented and the security function is covered in the Technical Specification phase to guarantee Secure by Design",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "e8bedab4-a8c4-4797-be89-53d67d745c97"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-PIY-05",
+                    "Requirement": "Document methods used to evaluate information resource implementations",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "The method to run the automation testing plan for the implementation is documented",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "ac6ea231-31c5-409b-8b8b-0793c20ed0fe"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-PIY-06",
+                    "Requirement": "Have a dedicated staff and budget for security with executive support, commensurate with the size, complexity, scope, and risk of the service offering",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "The dedicated staff and budget for security is arranged. However, for the confidential purpose there is no evidence can be published",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": []
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-PIY-07",
+                    "Requirement": "Document risk management decisions for software supply chain security",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G has documented the Supply Chain Risk Management Plan and follows the plan to perform the decision",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "3a70a7b8-fe40-4dfa-b52a-4780c2720b60"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "KSI": "Third Party Information Resources",
+            "ShortName": "KSI-TPR",
+            "Validations": [
+                {
+                    "ValidationID": "KSI-TPR-01",
+                    "Requirement": "Identify all third-party information resources",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G has identified all third-party vendors and place the inventory information in the SSP, see the section 6 and 7 of the evidence file",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "17268fa9-2273-4845-be47-72ee2f3b5347"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-TPR-02",
+                    "Requirement": "Regularly confirm that services handling federal information or are likely to impact the confidentiality, integrity, or availability of federal information are FedRAMP authorized and securely configured",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G annually reviews all external services are FedRAMP authorized and securely configured",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "f769a7c8-86ec-4274-8be4-6b6fb0b7214b"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-TPR-03",
+                    "Requirement": "Identify and prioritize mitigation of potential supply chain risks",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G has identified the potential supply chain risks and reviewed it annually",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "41d71845-b453-4749-a02f-4f672be95f94"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-TPR-04",
+                    "Requirement": "Monitor third party software information resources for upstream vulnerabilities, with contractual notification requirements or active monitoring services",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G has subscribed the third party vendor's subscription for the status notification",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "bb080765-1917-42a6-99ca-e733f75e7021",
+                                "bef1011a-5353-4cc4-920b-05485fface91",
+                                "f0038900-316e-4e8a-8ae0-f4259400ea58"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "KSI": "Cybersecurity Education",
+            "ShortName": "KSI-CED",
+            "Validations": [
+                {
+                    "ValidationID": "KSI-CED-01",
+                    "Requirement": "Ensure all employees receive security awareness training",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G has performed and ensured all participants receive and complete the security awareness training with KnowBe4 (FR#: FR2201340492)",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "aa035fbd-dd43-4a0c-8088-99f039dfbc66"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-CED-02",
+                    "Requirement": "Require role-specific training for high risk roles, including at least roles with privileged access",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G has requested the participants to complete the security awareness training based on the role",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "7bee5462-14ee-4e48-871d-87ca2d4c6109"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "KSI": "Recovery Planning",
+            "ShortName": "KSI-RPL",
+            "Validations": [
+                {
+                    "ValidationID": "KSI-RPL-01",
+                    "Requirement": "Define Recovery Time Objectives (RTO) and Recovery Point Objectives (RPO)",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "The RTO is 8 hours and RPO is 24 hours based on the frequency of data backup strategy",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "a9359b7f-0c93-4a29-8fa8-80ff74e3c989"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-RPL-02",
+                    "Requirement": "Develop and maintain a recovery plan that aligns with the defined recovery objectives",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G has developed a recovery plan that aligns with the defined recovery objectives, and reviewed the plan annually",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "b7aba14a-a59a-45c8-b2da-79ef5c8c37eb"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-RPL-03",
+                    "Requirement": "Perform system backups aligned with recovery objectives",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G has backup the required images and data to align with the RTO and RPO",
+                            "EvidenceSource": "script"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "f784b3eb-2e1d-49be-ad00-e24ceee8e4a0"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-RPL-04",
+                    "Requirement": "Regularly test the capability to recover from incidents and contingencies",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G tests the contingency plan annually",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "17ac7f99-5aa5-493a-98b3-e272776ff8fa"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "KSI": "Incident Reporting",
+            "ShortName": "KSI-INR",
+            "Validations": [
+                {
+                    "ValidationID": "KSI-INR-01",
+                    "Requirement": "Report incidents according to FedRAMP requirements and cloud service provider policies",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G has followed federal requirements and documented the Incident Response Plan",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "Additional evidence provided meets the intent of the KSI",
+                            "EvidenceEvaluated": [
+                                "326f7531-c33b-4b27-8e8d-c2a456738223"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-INR-02",
+                    "Requirement": "Maintain a log of incidents and periodically review past incidents for patterns or vulnerabilities",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G has documented the Incident Response Form and asked to maintrain the log of incidents, also review the incident escalated by Sumo Logic (FR#:FR1918740338)",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "Additional evidence provided meets the intent of the KSI",
+                            "EvidenceEvaluated": [
+                                "ccf5ecb0-ae0b-4504-8f34-e5e62e8db230",
+                                "eeb99b58-b22a-41ee-9eec-086779b5c427"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "ValidationID": "KSI-INR-03",
+                    "Requirement": "Generate after action reports and regularly incorporate lessons learned into operations",
+                    "ControlImplemented": true,
+                    "ValidationInfo": {
+                        "CSP": {
+                            "Strategy": "V4G has documented the lesson learned session in the Incident Response Plan",
+                            "EvidenceSource": "attestation"
+                        },
+                        "Assessor": {
+                            "ControlAssessed": true,
+                            "AssessorNotes":"Statement redacted for public version. Please contact Vyond for access to the full package.",
+                            "AdditionalNotes": "",
+                            "EvidenceEvaluated": [
+                                "dd71f0d1-7cd6-4dc4-8f93-29b96b013c51"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
