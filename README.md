@@ -8,7 +8,7 @@ Welcome to the V4G FedRAMP 20x Phase One Submission. This repository provides a 
 
 This repository includes an automated pipeline that verifies KSI requirements outlined in the FedRAMP 20x program.
 
-- Reference: [FedRAMP 20x KSI Standard](https://www.fedramp.gov/20x/standards/20x-ksi/)
+- Reference: [FedRAMP 20x KSI Standard](https://www.fedramp.gov/docs/20xP1/key-security-indicators/)
 - Submission Dashboard: [status.vyond-fedramp.com](https://status.vyond-fedramp.com/phase-one/)
 - Submission Presentation Deck: [FedRAMP 20x Pilot – Rationale.pptx](https://docs.google.com/presentation/d/1X2pSOBdoKqAULimb-EQDO50S9bP_VKQQ/edit?usp=sharing)
 
