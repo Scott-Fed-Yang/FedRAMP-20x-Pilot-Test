@@ -39,7 +39,7 @@
                      "script": "./script/KSI-CNA-3.sh"
                   }
                ],
-               "note": "Confrim all hosts are attahced at least 1 security group to guarantee the traffic flow is enforced by the cloud native network"
+               "note": "Confirm all hosts are attached to at least 1 security group to guarantee the traffic flow is enforced by the cloud native network"
             },
             "04": {
                "desc": "Use immutable infrastructure with strictly defined functionality and privileges by default",
@@ -66,7 +66,7 @@
                      "link": "https://drive.google.com/file/d/12huBPSaxGp4b3xr2ImlEu3S2aJayR5yi/view?usp=drive_link"
                   }
                ],
-               "note": "V4G utilizes Terraform Infrastructure as Code (IaC) to manage infrastructure and Packer to build immutable AWS AMIs. Each application runs on a dedicated instance profile with least privilege. GitHub Actions are used to implement Blue/Green deployments through CI/CD pipelines, ensuring consistent and controlled rollout."
+               "note": "V4G utilizes Terraform Infrastructure as Code (IaC) to manage infrastructure and Packer to build immutable AWS AMIs. Each application runs on a dedicated instance profile with the principle of least privilege. GitHub Actions are used to implement Blue/Green deployments through CI/CD pipelines, ensuring consistent and controlled rollout."
             },
             "05": {
                "desc": "Have denial of service protection",
@@ -113,7 +113,7 @@
                      "script": "./script/KSI-CNA-7.sh"
                   }
                ],
-               "note": "V4G hosts on AWS and follows <a href='https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html' target='_blank'>AWS Well-Architected Framework</a> to do the implementation"
+               "note": "V4G hosts on AWS and follows <a href='https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html' target='_blank'>AWS Well-Architected Framework</a> to do the implementation."
             }
          }
       },
@@ -134,7 +134,7 @@
                      "link": "https://drive.google.com/file/d/1WUP29o3FSi4A6qDCzfrSDHQJoQttDyxp/view?usp=drive_link"
                   }
                ],
-               "note": "V4G hardens the configuration based on CIS benchmark and montly reviews the configuration with Tanable"
+               "note": "V4G hardens the configuration based on CIS benchmark and monthly reviews the configuration with Tenable"
             },
             "02": {
                "desc": "Encrypt or otherwise secure network traffic",
@@ -144,7 +144,7 @@
                      "script": "./script/KSI-SVC-2.sh"
                   }
                ],
-               "note": "V4G has encrypted the network traffics of Application Load balancers, RDS Aurora, Elasticache Redis."
+               "note": "V4G has encrypted the network traffic of Application Load Balancers, RDS Aurora, Elasticache Redis."
             },
             "03": {
                "desc": "Encrypt all federal and sensitive information at rest",
@@ -154,7 +154,7 @@
                      "script": "./script/KSI-SVC-3.sh"
                   }
                ],
-               "note": "V4G has encrypted data on S3 buckets, RDS Aurora, Elasticache Redis, the image files and all backup database snapshots."
+               "note": "V4G has encrypted data in S3 buckets, RDS Aurora, Elasticache Redis, the image files and all backup database snapshots."
             },
             "04": {
                "desc": "Manage configuration centrally",
@@ -216,7 +216,7 @@
                      "link": "https://drive.google.com/file/d/1NIwnuTIvMc0mJXRJEFFNZ2SDZRtBmiuV/view?usp=drive_link"
                   }
                ],
-               "note": "V4G has subscripted <a href='https://docs.aws.amazon.com/linux/al2023/ug/receive-update-notification.html' target='_blank'>AWS Linux 2023 update</a> to inform for applying security patches, and uses a Security Tracker to guarantee the deployment is controlled"
+               "note": "V4G has subscribed to notifications for <a href='https://docs.aws.amazon.com/linux/al2023/ug/receive-update-notification.html' target='_blank'>AWS Linux 2023 update</a> to inform V4G for applying security patches, and uses a Security Tracker to guarantee the deployment is controlled"
             }
          }
       },
@@ -317,7 +317,7 @@
                      "link": "https://drive.google.com/file/d/1CTcmyYtie7JTbj1R7IuUJyfkdxE7vZ5H/view?usp=drive_link"
                   }
                ],
-               "note": "V4G adopts Sumo Logic (FR#: <a href='https://marketplace.fedramp.gov/products/FR1918740338' target='_blank'>FR1918740338</a>) to be the SIEM"
+               "note": "V4G adopts Sumo Logic (FR#: <a href='https://marketplace.fedramp.gov/products/FR1918740338' target='_blank'>FR1918740338</a>) as the SIEM"
             },
             "02": {
                "desc": "Regularly review and audit logs",
@@ -328,7 +328,7 @@
                      "link": "https://drive.google.com/file/d/12Emr2nJotl2d-pwoLChfVz8v-xtJMNoL/view?usp=drive_link"
                   }
                ],
-               "note": "Sumo Logic helps to review and analyze the log immediately and V4G runs the investigation for the suspicious behaviors when occurred"
+               "note": "Sumo Logic helps to review and analyze the log immediately and V4G runs the investigation for the suspicious behaviors when they occur"
             },
             "03": {
                "desc": "Rapidly detect and remediate or mitigate vulnerabilities",
@@ -350,7 +350,7 @@
                      "link": "https://drive.google.com/file/d/1DWN86l0yNOaHrXZFU6lcej3U4ETsnhpw/view?usp=drive_link"
                   }
                ],
-               "note": "V4G runs the installed agent to run the authenticated vulnerability scanning with Tenable (FR#: <a href='https://marketplace.fedramp.gov/products/FR1814276801' target='_blank'>FR1814276801</a>), the installed agent runs credentialed checks to guarantee the uthenticated vulnerability scanning"
+               "note": "V4G runs the installed agent to run the authenticated vulnerability scanning with Tenable (FR#: <a href='https://marketplace.fedramp.gov/products/FR1814276801' target='_blank'>FR1814276801</a>), the installed agent runs credentialed checks to guarantee the authenticated vulnerability scanning"
             },
             "05": {
                "desc": "Perform Infrastructure as Code and configuration evaluation and testing",
@@ -365,7 +365,7 @@
                      "link": "https://drive.google.com/file/d/1bNpZd-zIWmTO6cuCNEyel3Emp169aRbB/view?usp=drive_link"
                   }
                ],
-               "note": "V4G adopts TerraForm to be the IaC and monthly runs the Configuration scanning with Tenable (FR#: <a href='https://marketplace.fedramp.gov/products/FR1814276801' target='_blank'>FR1814276801</a>)"
+               "note": "V4G adopts Terraform as the IaC and monthly runs the configuration scanning with Tenable (FR#: <a href='https://marketplace.fedramp.gov/products/FR1814276801' target='_blank'>FR1814276801</a>)"
             },
             "06": {
                "desc": "Centrally track and prioritize the mitigation and/or remediation of identified vulnerabilities",
@@ -623,7 +623,7 @@
                      "link": "https://drive.google.com/file/d/1to_ev5Lm9Cqr-p_-l8XbM8-0V8ypMfbb/view?usp=drive_link"
                   }
                ],
-               "note": "The RTO is 8 hours and RPO is 24 hours based on the frequency of data backup strategy"
+               "note": "The RTO is 8 hours and the RPO is 24 hours, based on the data backup frequency"
             },
             "02": {
                "desc": "Develop and maintain a recovery plan that aligns with the defined recovery objectives",
@@ -634,7 +634,7 @@
                      "link": "https://drive.google.com/file/d/1uiQAh15Fp8ZxEk5GxEh1ZnYtMdz-z-wf/view?usp=drive_link"
                   }
                ],
-               "note": "V4G has developed a recovery plan that aligns with the defined recovery objectives, and reivewed the plan annually"
+               "note": "V4G has developed a recovery plan that aligns with the defined recovery objectives, and reviews the plan annually"
             },
             "03": {
                "desc": "Perform system backups aligned with recovery objectives",
@@ -679,15 +679,11 @@
                "type": "attestation",
                "ref": [
                   {
-                     "text": "KSI-INR-2-IRF.pdf",
-                     "link": "https://drive.google.com/file/d/1HR8TJWbBPrReKvN46Grx83LqCPAOR_xW/view?usp=drive_link"
-                  },
-                  {
-                     "text": "KSI-INR-2-SumoLogic.png",
-                     "link": "https://drive.google.com/file/d/1XYXKpkUU4MAwyfcz2TGNM5sLy1BbHdFT/view?usp=drive_link"
+                     "text": "KSI-INR-2-IncidentReviewTask.png",
+                     "link": "https://drive.google.com/file/d/1iD74nFCBcnxVITRc8XaaaUajSVCWAEn0/view?usp=drive_link"
                   }
                ],
-               "note": "V4G has documented the Incident Response Form and asked to maintrain the log of incidents, also review the incident escalated by Sumo Logic (FR#: <a href='https://marketplace.fedramp.gov/products/FR1918740338' target='_blank'>FR1918740338</a>)"
+               "note": "V4G has reviewed the incident annually for patterns or vulnerabilities and built the scenario for IR/DR drills"
             },
             "03": {
                "desc": "Generate after action reports and regularly incorporate lessons learned into operations",
@@ -698,7 +694,7 @@
                      "link": "https://drive.google.com/file/d/1612ehPb0JhAMKJ-CIaAbQ6dIV3DTgQa_/view?usp=drive_link"
                   }
                ],
-               "note": "V4G has documented the lesson learned session in the Incident Response Plan"
+               "note": "V4G has documented the lessons learned session in the Incident Response Plan"
             }
          }
       }
