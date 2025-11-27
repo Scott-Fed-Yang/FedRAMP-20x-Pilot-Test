@@ -132,6 +132,10 @@
                   {
                      "text": "KSI-SVC-1-AWS Foundation.pdf",
                      "link": "https://drive.google.com/file/d/1WUP29o3FSi4A6qDCzfrSDHQJoQttDyxp/view?usp=drive_link"
+                  },
+                  {
+                     "text": "KSI-SVC-1-Deviation Request Summary.xlsx",
+                     "link": "https://docs.google.com/spreadsheets/d/11WUraFMshUmNlc7-Uu3-b8YgkrPNC6lr/edit?usp=sharing&ouid=107592241952893885147&rtpof=true&sd=true"
                   }
                ],
                "note": "V4G hardens the configuration based on CIS benchmark and monthly reviews the configuration with Tenable"
