@@ -19,7 +19,7 @@
                      "script": "./script/KSI-CNA-1.sh"
                   }
                ],
-               "note": "V4G uses AWS Security Group to limit the traffic. Check the AWS Trusted Advisor <a href='https://docs.aws.amazon.com/awssupport/latest/user/security-checks.html#security-groups-specific-ports-unrestricted' target='_blank'>Security Groups – Specific Ports Unrestricted</a> and <a href='https://docs.aws.amazon.com/awssupport/latest/user/security-checks.html#security-groups-unrestricted-access' target='_blank'>Security Groups – Unrestricted Access</a>, V4G commit most qualifications"
+               "note": "V4G uses AWS Security Group to limit the traffic. Check the AWS Trusted Advisor <a href='https://docs.aws.amazon.com/awssupport/latest/user/security-checks.html#security-groups-specific-ports-unrestricted' target='_blank'>Security Groups – Specific Ports Unrestricted</a> and <a href='https://docs.aws.amazon.com/awssupport/latest/user/security-checks.html#security-groups-unrestricted-access' target='_blank'>Security Groups – Unrestricted Access</a>, V4G meets most qualifications"
             },
             "02": {
                "desc": "Design systems to minimize the attack surface and minimize lateral movement if compromised",
@@ -103,7 +103,7 @@
                      "script": "./script/KSI-CNA-6.sh"
                   }
                ],
-               "note": "Check the AWS Trusted Advisor <a href='https://docs.aws.amazon.com/awssupport/latest/user/fault-tolerance-checks.html' target='_blank'>Fault Tolerance Checks</a>, V4G commit most qualifications"
+               "note": "Check the AWS Trusted Advisor <a href='https://docs.aws.amazon.com/awssupport/latest/user/fault-tolerance-checks.html' target='_blank'>Fault Tolerance Checks</a>, V4G meets most qualifications"
             },
             "07": {
                "desc": "Ensure cloud-native information resources are implemented based on host provider\u2019s best practices and documented guidance",
@@ -134,11 +134,11 @@
                      "link": "https://drive.google.com/file/d/1WUP29o3FSi4A6qDCzfrSDHQJoQttDyxp/view?usp=drive_link"
                   },
                   {
-                     "text": "KSI-SVC-1-Deviation Request Summary.xlsx",
-                     "link": "https://docs.google.com/spreadsheets/d/11WUraFMshUmNlc7-Uu3-b8YgkrPNC6lr/edit?usp=sharing&ouid=107592241952893885147&rtpof=true&sd=true"
+                     "text": "KSI-SVC-1-POAM.xlsx",
+                     "link": "https://docs.google.com/spreadsheets/d/1pCazDXFc4YGfOjeYtpTAh4q5kL6qu8tw/edit?usp=drive_link&ouid=111280732670615327704&rtpof=true&sd=true"
                   }
                ],
-               "note": "V4G hardens the configuration based on CIS benchmark and monthly reviews the configuration with Tenable"
+               "note": "V4G hardens the configuration based on CIS benchmark and monthly reviews the configuration with Tenable. All failed items have been completed the deviation request process and all warning items have been completed the review and are in the process of the deviation request"
             },
             "02": {
                "desc": "Encrypt or otherwise secure network traffic",
@@ -185,7 +185,7 @@
                      "link": "https://drive.google.com/file/d/1Gm-IdzRrO0tFtbwEPyxQ6akrgd4Sxb2A/view?usp=drive_link"
                   }
                ],
-               "note": "V4G centrally manages infrastructure and application configurations using a combination of tools and AWS services:<br>1. Packer: used to build immutable and standardized AWS AMI<br>2.Terraform: used to consistently provision infrastructure and enforce configuration baselines.<br>3.AWS SSM Parameter: use to centrally store and retrieve parameters at runtime.<br>4. AWS Config: is enabled to continuously monitor and record configuration changes."
+               "note": "V4G centrally manages infrastructure and application configurations using a combination of tools and AWS services:<br>1. Packer: used to build immutable and standardized AWS AMI<br>2.Terraform: used to consistently provision infrastructure and enforce configuration baselines.<br>3.AWS SSM Parameter: used to centrally store and retrieve parameters at runtime.<br>4. AWS Config: is enabled to continuously monitor and record configuration changes."
             },
             "05": {
                "desc": "Enforce system and information resource integrity through cryptographic means",
@@ -241,7 +241,7 @@
                      "link": "https://drive.google.com/file/d/1jYGXEgz8t3aKS1RngajTHgfKTgu5jQRp/view?usp=drive_link"
                   }
                ],
-               "note": "V4G has enforced YubiKey 5 FIPS Series (CMVP #3914) to be the MFA device of AWS and Google Identity (the other external service must SSO with Google Identity) to guarantee phishing-resistent"
+               "note": "V4G has enforced YubiKey 5 FIPS Series (CMVP #3914) to be the MFA device of AWS and Google Identity (the other external service must SSO with Google Identity) to guarantee phishing-resistent MFA"
             },
             "02": {
                "desc": "Use secure passwordless methods for user authentication and authorization when feasible, otherwise enforce strong passwords with MFA",
@@ -267,7 +267,7 @@
                      "link": "https://drive.google.com/file/d/1e2AsdsJdEkQ6nnnvDbCyljfZzaR-nL-v/view?usp=drive_link"
                   }
                ],
-               "note": "V4G does not allows the non-user accounts/services to do the console login"
+               "note": "V4G does not allow the non-user accounts/services to do the console login"
             },
             "04": {
                "desc": "Use a least-privileged, role and attribute-based, and just-in-time security authorization model for all user and non-user accounts and services",
@@ -285,8 +285,8 @@
                "type": "attestation",
                "ref": [
                   {
-                     "text": "KSI-IAM-5-DeepSecurity.pdf",
-                     "link": "https://drive.google.com/file/d/1-fYyNsoT5F81L027prG1aepBejWqUGQN/view?usp=drive_link"
+                     "text": "KSI-IAM-5-DeepSecurity.xlsx",
+                     "link": "https://docs.google.com/spreadsheets/d/1DfMHA5zD6Pzrhj1CaPg-H76DrKUa2Vvt/edit?usp=sharing&ouid=107592241952893885147&rtpof=true&sd=true"
                   }
                ],
                "note": "V4G follows AWS document to implement the Zero Trust Design principle and the following are implemented:<br>1. Strong Authentication (refer to KSI-IAM-2)<br>2. Least Privileges Access (refer to KSI-IAM-4)<br>3. Micro Segmentation (refer to KSI-CNA-2)<br>4. Full Encryption (refer to KSI-SVC-2, KSI-SVC-3)<br>5. Endpoint Security<br>6. Logging and Alert Automated Policy Enforcement(refer to KSI-MLA-1)"
@@ -339,11 +339,11 @@
                "type": "attestation",
                "ref": [
                   {
-                     "text": "KSI-MLA-3.pdf",
-                     "link": "https://drive.google.com/file/d/1I2maz1Z7eP7EHq5W0lCophWupLXI9W84/view?usp=drive_link"
+                     "text": "KSI-MLA-3-ConMonReport.pdf",
+                     "link": "https://drive.google.com/file/d/1_2wViWL0QjS6-0gHszChNXTHpEZmeFty/view?usp=drive_link"
                   }
                ],
-               "note": "V4G follows the procedure (the section 'Flaw Remediation') to remediate the vulnerability based on 30 (High) - 90 (Moderate) - 180 (Low) days principle"
+               "note": "V4G remediates the vulnerability based on 30 (High) - 90 (Moderate) - 180 (Low) days principle and track the progress in the monthly ConMon Report"
             },
             "04": {
                "desc": "Perform authenticated vulnerability scanning on information resources",
@@ -376,8 +376,8 @@
                "type": "attestation",
                "ref": [
                   {
-                     "text": "KSI-MLA-6.png",
-                     "link": "https://drive.google.com/file/d/1dFIsRYkG3nWqYP3pW16y_pSU6By7orjk/view?usp=drive_link"
+                     "text": "KSI-MLA-6-POAM.xlsx",
+                     "link": "https://docs.google.com/spreadsheets/d/1KDZgxZaKVAZNv6-FohTIgddgwYD8eSj9/edit?usp=drive_link&ouid=111280732670615327704&rtpof=true&sd=true"
                   }
                ],
                "note": "V4G follows FedRAMP requirements and adopts the POA&M sheet to centrally track and prioritize the remediation of identified vulnerabilities"
@@ -430,7 +430,7 @@
                      "link": "https://drive.google.com/file/d/1mLWZQkd1jWpJvDn8g0lhjYP988aozt0Q/view?usp=drive_link"
                   }
                ],
-               "note": "V4G has followed FedRAMP requirements to document the change management procedure, all chenage requirements must follow the procedure"
+               "note": "V4G has followed FedRAMP requirements to document the change management procedure, all change requirements must follow the procedure"
             },
             "05": {
                "desc": "Evaluate the risk and potential impact of any change",
@@ -458,8 +458,8 @@
                "type": "attestation",
                "ref": [
                   {
-                     "text": "KSI-PIY-1.pdf",
-                     "link": "https://drive.google.com/file/d/1ESIs3PM8NGM_xXKV6VgcrFZFYtnQy7iF/view?usp=drive_link"
+                     "text": "KSI-PIY-1.xlsx",
+                     "link": "https://docs.google.com/spreadsheets/d/1cNgwZLX39iB90NOyWtX2slFvRDa_l5tg/edit?usp=drive_link&ouid=107592241952893885147&rtpof=true&sd=true"
                   }
                ],
                "note": "V4G runs the asset inventory for each deployment and modification"
@@ -582,7 +582,7 @@
                      "link": "https://drive.google.com/file/d/15IVa0L-KN0F73KuBHofsGjU80VgQmboB/view?usp=drive_link"
                   }
                ],
-               "note": "V4G has subscribed the third party vendor's subscription for the status notification"
+               "note": "V4G has subscribed to the third party vendor's subscription for the status notification"
             }
          }
       },
